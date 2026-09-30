@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4.0 Engineer Dashboard</title>
+
+<style>
+:root {
+    --bg: #07111f;
+    --panel: #0d1b2d;
+    --panel2: #11243a;
+    --text: #eef5ff;
+    --muted: #9eb0c7;
+    --accent: #45d9ff;
+    --accent2: #8b7cff;
+    --green: #48e39a;
+    --yellow: #ffd166;
+    --red: #ff647c;
+    --border: rgba(255,255,255,.09);
+    --shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(69,217,255,.10), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(139,124,255,.12), transparent 30%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button, input, textarea, select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: min(1200px, 94%);
+    margin: auto;
+}
+
+header {
+    padding: 55px 0 35px;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 45px;
+    background:
+        linear-gradient(135deg, rgba(69,217,255,.09), rgba(139,124,255,.08)),
+        var(--panel);
+    box-shadow: var(--shadow);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    right: -100px;
+    top: -120px;
+    border-radius: 50%;
+    background: rgba(69,217,255,.12);
+    filter: blur(10px);
+    animation: float 7s ease-in-out infinite;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    letter-spacing: -4px;
+    line-height: .95;
+}
+
+.gradient {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    max-width: 720px;
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.quote {
+    margin-top: 25px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--accent);
+    background: rgba(255,255,255,.03);
+    border-radius: 0 12px 12px 0;
+    font-weight: 700;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0) }
+    50% { transform: translateY(25px) }
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(18px);
+    background: rgba(7,17,31,.78);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.nav-inner button {
+    white-space: nowrap;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 9px 14px;
+}
+
+.nav-inner button:hover {
+    color: var(--text);
+    border-color: var(--border);
+    background: rgba(255,255,255,.04);
+}
+
+section {
+    margin: 35px 0;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.section-title h2 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.section-title p {
+    margin: 5px 0 0;
+    color: var(--muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.card {
+    background: rgba(13,27,45,.88);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 23px;
+    box-shadow: 0 12px 35px rgba(0,0,0,.18);
+    transition: transform .2s, border-color .2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(69,217,255,.25);
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.progress-wrap {
+    background: #06101c;
+    border-radius: 999px;
+    height: 12px;
+    overflow: hidden;
+    margin: 12px 0;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width .5s ease;
+}
+
+.progress-text {
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.check {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.025);
+    transition: .2s;
+}
+
+.check:hover {
+    background: rgba(255,255,255,.06);
+}
+
+.check input {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+}
+
+.check.done label {
+    text-decoration: line-through;
+    color: #718299;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: .75rem;
+    font-weight: 800;
+}
+
+.red {
+    background: rgba(255,100,124,.12);
+    color: var(--red);
+}
+
+.yellow {
+    background: rgba(255,209,102,.12);
+    color: var(--yellow);
+}
+
+.green {
+    background: rgba(72,227,154,.12);
+    color: var(--green);
+}
+
+.blue {
+    background: rgba(69,217,255,.12);
+    color: var(--accent);
+}
+
+.workflow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.step {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    padding: 18px 12px;
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    position: relative;
+}
+
+.step strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.step small {
+    color: var(--muted);
+}
+
+.arrow {
+    align-self: center;
+    color: var(--accent);
+    font-size: 1.5rem;
+}
+
+textarea, input[type="text"], input[type="number"], select {
+    width: 100%;
+    background: #071422;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px;
+    outline: none;
+}
+
+textarea:focus, input:focus, select:focus {
+    border-color: var(--accent);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.btn {
+    border: 0;
+    border-radius: 11px;
+    padding: 11px 16px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    color: #04101c;
+    font-weight: 800;
+    transition: transform .15s, filter .15s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.btn.secondary {
+    background: rgba(255,255,255,.07);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn.danger {
+    background: rgba(255,100,124,.12);
+    color: var(--red);
+    border: 1px solid rgba(255,100,124,.25);
+}
+
+.timer {
+    text-align: center;
+    padding: 30px;
+}
+
+.time {
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -4px;
+    margin: 10px 0;
+}
+
+.timer-status {
+    color: var(--muted);
+    margin-bottom: 18px;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.3rem;
+    font-weight: 900;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+.priority {
+    border-left: 4px solid;
+}
+
+.priority.red-border {
+    border-left-color: var(--red);
+}
+
+.priority.yellow-border {
+    border-left-color: var(--yellow);
+}
+
+.priority.green-border {
+    border-left-color: var(--green);
+}
+
+.tip {
+    border-left: 3px solid var(--accent2);
+    padding: 12px 15px;
+    margin: 12px 0;
+    background: rgba(139,124,255,.06);
+    border-radius: 0 10px 10px 0;
+}
+
+details {
+    background: rgba(255,255,255,.025);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 13px 15px;
+    margin: 8px 0;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: 750;
+}
+
+.error-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+footer {
+    text-align: center;
+    color: var(--muted);
+    padding: 45px 0;
+}
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 100;
+    background: var(--panel2);
+    border: 1px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 12px;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: .3s;
+    box-shadow: var(--shadow);
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(8px);
+    z-index: 90;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    max-width: 750px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.big-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+}
+
+.streak {
+    color: var(--yellow);
+}
+
+@media(max-width: 800px) {
+    .grid, .grid3 {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 28px;
+    }
+
+    .error-row {
+        grid-template-columns: 1fr;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container">
+<div class="hero">
+    <div class="badge blue">ENGINEERING • 4.0 MODE</div>
+    <h1>Become the <span class="gradient">Engineer.</span></h1>
+
+    <p>
+        A personal operating system for turning inconsistent studying into
+        consistent execution. You do not need a perfect semester.
+        You need a better system from today onward.
+    </p>
+
+    <div class="quote">
+        "Entertainment comes after execution. Confusion gets resolved before it compounds."
+    </div>
+</div>
+</div>
+</header>
+
+<nav>
+<div class="container nav-inner">
+    <button onclick="scrollToId('dashboard')">Dashboard</button>
+    <button onclick="scrollToId('catchup')">Catch-Up</button>
+    <button onclick="scrollToId('daily')">Daily</button>
+    <button onclick="scrollToId('study')">Study System</button>
+    <button onclick="scrollToId('checklist')">Checklist</button>
+    <button onclick="scrollToId('timer')">Timer</button>
+    <button onclick="scrollToId('errors')">Error Log</button>
+</div>
+</nav>
+
+<main class="container">
+
+<section id="dashboard">
+<div class="section-title">
+    <div>
+        <h2>Command Center</h2>
+        <p>Your progress is saved automatically in this browser.</p>
+    </div>
+</div>
+
+<div class="grid3">
+    <div class="card stat">
+        <div class="stat-number" id="overallProgress">0%</div>
+        <div class="stat-label">Checklist complete</div>
+    </div>
+
+    <div class="card stat">
+        <div class="stat-number" id="sessionsDone">0</div>
+        <div class="stat-label">Study sessions completed</div>
+    </div>
+
+    <div class="card stat">
+        <div class="stat-number streak" id="streak">0</div>
+        <div class="stat-label">Study-day streak</div>
+    </div>
+</div>
+
+<div class="card" style="margin-top:18px">
+    <h3>Overall Progress</h3>
+    <div class="progress-wrap">
+        <div class="progress" id="mainProgress"></div>
+    </div>
+    <div class="progress-text" id="progressLabel">0 of 0 complete</div>
+</div>
+</section>
+
+
+<section id="catchup">
+<div class="section-title">
+    <div>
+        <h2>🧠 Catch-Up Without Getting Stuck</h2>
+        <p>Use this whenever a prerequisite is blocking the next concept.</p>
+    </div>
+    <button class="btn" onclick="openModal()">Start Catch-Up Mode</button>
+</div>
+
+<div class="card">
+    <div class="workflow">
+        <div class="step">
+            <strong>1. Identify</strong>
+            <small>What exactly is confusing?</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+            <strong>2. Find the Gap</strong>
+            <small>What prerequisite is missing?</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+            <strong>3. Learn</strong>
+            <small>20–30 min targeted review</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+            <strong>4. Test</strong>
+            <small>Explain or solve without help</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+            <strong>5. Move</strong>
+            <small>Basic mastery = move on</small>
+        </div>
+    </div>
+
+    <div class="tip">
+        <strong>Important:</strong>
+        You are not trying to completely master the old topic before continuing.
+        You are trying to reach <strong>minimum viable understanding</strong>:
+        enough understanding to successfully engage with the next concept.
+    </div>
+
+    <details>
+        <summary>What counts as "enough"?</summary>
+        <p class="muted">
+            You should be able to explain the basic idea in your own words,
+            identify when it applies, and solve a basic representative problem
+            without copying the solution.
+        </p>
+    </details>
+
+    <details>
+        <summary>What if I still can't do it after 30 minutes?</summary>
+        <p class="muted">
+            Don't spend the entire evening fighting one concept. Break it into
+            a smaller prerequisite. Ask: "What would I need to know to understand
+            THIS?" Work one level lower, then retry.
+        </p>
+    </details>
+
+    <details>
+        <summary>What if I can do basic problems but advanced ones are hard?</summary>
+        <p class="muted">
+            Move on. Put the topic in your later-review queue. Advanced mastery
+            can come through spaced and interleaved practice.
+        </p>
+    </details>
+</div>
+</section>
+
+
+<section id="daily">
+<div class="section-title">
+    <div>
+        <h2>☀️ Daily Operating System</h2>
+        <p>Your default day when there is no immediate exam crisis.</p>
+    </div>
+</div>
+
+<div class="card">
+<div class="checklist" data-group="daily">
+
+<label class="check">
+<input type="checkbox">
+<span><b>Attend class</b> — treat lectures as part of studying.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>Same-day review</b> — spend 20–40 minutes reviewing today's material.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>Practice</b> — solve problems without immediately looking at examples.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>Find today's gaps</b> — write down anything you don't understand.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>Resolve important gaps</b> — use Catch-Up Mode instead of postponing everything.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>Maximize coursework</b> — complete assignments carefully and check your work.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>No shows before the first serious study block.</b></span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>Phone away</b> during focused work.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>Eat → walk → desk</b> instead of eating → couch → nap.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>Plan tomorrow</b> before ending the day.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span><b>Sleep enough</b> so tomorrow's studying actually works.</span>
+</label>
+
+</div>
+</div>
+</section>
+
+
+<section id="study">
+<div class="section-title">
+    <div>
+        <h2>📚 The Study System</h2>
+        <p>Use different techniques for different jobs.</p>
+    </div>
+</div>
+
+<div class="grid">
+
+<div class="card priority red-border">
+<span class="badge red">RETRIEVAL</span>
+<h3>Don't just reread</h3>
+<p class="muted">
+Close the notes and force yourself to retrieve the information.
+For technical courses, this means solving problems without seeing
+the solution first.
+</p>
+
+<div class="checklist">
+<label class="check">
+<input type="checkbox">
+<span>Can I explain the concept without notes?</span>
+</label>
+<label class="check">
+<input type="checkbox">
+<span>Can I solve a basic problem without an example?</span>
+</label>
+<label class="check">
+<input type="checkbox">
+<span>Can I explain why the method works?</span>
+</label>
+</div>
+</div>
+
+<div class="card priority yellow-border">
+<span class="badge yellow">SPACING</span>
+<h3>Return later</h3>
+<p class="muted">
+Do not study something once and abandon it. Revisit it later,
+especially after you think you've learned it.
+</p>
+
+<div class="tip">
+Example: Learn Monday → recall Tuesday → practice Thursday →
+mixed problems Sunday.
+</div>
+</div>
+
+<div class="card priority green-border">
+<span class="badge green">INTERLEAVING</span>
+<h3>Mix problems</h3>
+<p class="muted">
+Once you understand the individual topics, mix them.
+This forces you to decide which method applies.
+</p>
+
+<div class="tip">
+Instead of 15 identical questions:
+<br>
+<strong>A → B → C → A → C → B</strong>
+</div>
+</div>
+
+<div class="card">
+<span class="badge blue">TEACH</span>
+<h3>Explain it simply</h3>
+<p class="muted">
+Pick a concept and explain it as if you're teaching someone who
+has never seen it. Wherever your explanation breaks down,
+you've found a knowledge gap.
+</p>
+</div>
+
+</div>
+</section>
+
+
+<section id="priorities">
+<div class="section-title">
+    <div>
+        <h2>🚦 Priority System</h2>
+        <p>Don't treat every course as equally urgent.</p>
+    </div>
+</div>
+
+<div class="grid3">
+
+<div class="card priority red-border">
+<span class="badge red">🔴 &lt; 7 DAYS</span>
+<h3>Exam Soon</h3>
+<ul>
+<li>Heavy practice</li>
+<li>Timed problems</li>
+<li>Weak-topic repair</li>
+<li>Mixed practice</li>
+<li>Error-log review</li>
+</ul>
+</div>
+
+<div class="card priority yellow-border">
+<span class="badge yellow">🟡 1–3 WEEKS</span>
+<h3>Maintain</h3>
+<ul>
+<li>Regular practice</li>
+<li>Fix confusion</li>
+<li>Stay current</li>
+<li>Gradually increase intensity</li>
+</ul>
+</div>
+
+<div class="card priority green-border">
+<span class="badge green">🟢 &gt; 3 WEEKS</span>
+<h3>Maintenance</h3>
+<ul>
+<li>Keep up with class</li>
+<li>Complete assignments</li>
+<li>Short review sessions</li>
+<li>Prevent gaps</li>
+</ul>
+</div>
+
+</div>
+</section>
+
+
+<section id="checklist">
+<div class="section-title">
+    <div>
+        <h2>✅ 4.0 Checklist</h2>
+        <p>Check these off as your habits become automatic.</p>
+    </div>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>📖 Academic</h3>
+<div class="checklist">
+
+<label class="check">
+<input type="checkbox">
+<span>Attend every class unless there's a legitimate reason not to.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Review lectures the same day.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Practice instead of mainly rereading.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Use retrieval practice.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Use spaced practice.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Use interleaving once topics are understood.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Do at least one timed practice session before major exams.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Keep an error log.</span>
+</label>
+
+</div>
+</div>
+
+
+<div class="card">
+<h3>🎯 Assignments</h3>
+<div class="checklist">
+
+<label class="check">
+<input type="checkbox">
+<span>Start assignments early enough to ask questions.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Maximize every available mark.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Check work before submitting.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Understand mistakes instead of just seeing the correct answer.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Track every deadline.</span>
+</label>
+
+</div>
+</div>
+
+
+<div class="card">
+<h3>🧠 Understanding</h3>
+<div class="checklist">
+
+<label class="check">
+<input type="checkbox">
+<span>Don't allow confusion to accumulate for weeks.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Use Catch-Up Mode when a prerequisite blocks you.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Reach minimum viable understanding before moving on.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Return later for deeper mastery.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Ask for help when you've identified a specific gap.</span>
+</label>
+
+</div>
+</div>
+
+
+<div class="card">
+<h3>📺 Distractions</h3>
+<div class="checklist">
+
+<label class="check">
+<input type="checkbox">
+<span>No shows before the first serious study block.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Turn off autoplay.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Phone away during study.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Use a website blocker if necessary.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Entertainment comes after execution.</span>
+</label>
+
+</div>
+</div>
+
+
+<div class="card">
+<h3>🍽️ Energy</h3>
+<div class="checklist">
+
+<label class="check">
+<input type="checkbox">
+<span>Don't immediately sit on the couch after eating.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Walk 10–15 minutes after lunch/dinner when possible.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Drink water.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Avoid enormous meals before difficult study.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>If napping, use a controlled ~20-minute nap.</span>
+</label>
+
+</div>
+</div>
+
+
+<div class="card">
+<h3>😴 Recovery</h3>
+<div class="checklist">
+
+<label class="check">
+<input type="checkbox">
+<span>Maintain a consistent sleep schedule.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Aim for roughly 7–9 hours of sleep.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Avoid regular all-nighters.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Don't sacrifice tomorrow's productivity for one extra tired hour.</span>
+</label>
+
+</div>
+</div>
+
+</div>
+</section>
+
+
+<section id="timer">
+<div class="section-title">
+    <div>
+        <h2>⏱️ Focus Timer</h2>
+        <p>Use this when you're tempted to procrastinate.</p>
+    </div>
+</div>
+
+<div class="card timer">
+<div class="timer-status" id="timerStatus">Ready</div>
+<div class="time" id="time">25:00</div>
+
+<div class="timer-controls">
+<button class="btn" onclick="startTimer()">Start</button>
+<button class="btn secondary" onclick="pauseTimer()">Pause</button>
+<button class="btn secondary" onclick="resetTimer()">Reset</button>
+<button class="btn secondary" onclick="setTimer(50)">50 min</button>
+<button class="btn secondary" onclick="setTimer(25)">25 min</button>
+</div>
+
+<p class="muted">
+During the timer: phone away, one task, no shows.
+When it ends: take a short break, then decide whether to continue.
+</p>
+</div>
+</section>
+
+
+<section id="errors">
+<div class="section-title">
+    <div>
+        <h2>❌ Error Log</h2>
+        <p>Your mistakes are a study map.</p>
+    </div>
+    <button class="btn" onclick="addError()">+ Add Error</button>
+</div>
+
+<div class="card">
+<div id="errorContainer"></div>
+
+<div class="tip">
+<strong>Rule:</strong> Don't just record the correct answer.
+Record <em>why you got it wrong</em>. Then redo the problem later without looking.
+</div>
+</div>
+</section>
+
+
+<section id="weekly">
+<div class="section-title">
+    <div>
+        <h2>📅 Weekly Reset</h2>
+        <p>Do this once every week.</p>
+    </div>
+</div>
+
+<div class="card">
+<div class="checklist">
+
+<label class="check">
+<input type="checkbox">
+<span>Check every upcoming deadline.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Check every upcoming exam.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Identify the 3 biggest academic weaknesses.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Schedule study blocks for those weaknesses.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Review the error log.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Ask: "What worked this week?"</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Ask: "Where did I procrastinate?"</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Change the system instead of relying on more motivation.</span>
+</label>
+
+</div>
+</div>
+</section>
+
+
+<section>
+<div class="card">
+<h2>🧑‍💻 The Engineer Alter Ego</h2>
+
+<p class="muted">
+This isn't someone who never struggles. It's someone who responds correctly
+when things get difficult.
+</p>
+
+<div class="grid3">
+
+<div>
+<h3>Shows up</h3>
+<p class="muted">Does the work even when motivation is low.</p>
+</div>
+
+<div>
+<h3>Doesn't accumulate gaps</h3>
+<p class="muted">Finds the missing prerequisite and repairs it.</p>
+</div>
+
+<div>
+<h3>Recovers quickly</h3>
+<p class="muted">One bad day never becomes a bad week.</p>
+</div>
+
+</div>
+
+<div class="quote">
+"What would the person who gets the 4.0 do right now?"
+</div>
+</div>
+</section>
+
+
+<section>
+<div class="card">
+<h2>🚨 Emergency Mode</h2>
+
+<p class="muted">
+If an exam is within 7 days, temporarily simplify your life.
+</p>
+
+<div class="checklist">
+
+<label class="check">
+<input type="checkbox">
+<span>Identify every examinable topic.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Rank topics Green / Yellow / Red.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Attack Red topics first.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Practice instead of rereading.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Do mixed problems.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Run a timed practice session.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Review mistakes.</span>
+</label>
+
+<label class="check">
+<input type="checkbox">
+<span>Sleep rather than pulling a pointless all-nighter.</span>
+</label>
+
+</div>
+</div>
+</section>
+
+
+<section>
+<div class="card">
+<h2>💡 Quick Rules</h2>
+
+<details>
+<summary>I'm procrastinating. What do I do?</summary>
+<p class="muted">
+Don't negotiate with yourself. Set a 10-minute timer and start one problem.
+You only need to commit to beginning.
+</p>
+</details>
+
+<details>
+<summary>I don't understand something.</summary>
+<p class="muted">
+Don't blindly move on and don't spend the whole day stuck.
+Use Catch-Up Mode: identify → prerequisite → targeted learning → test → move.
+</p>
+</details>
+
+<details>
+<summary>I got a bad grade.</summary>
+<p class="muted">
+Don't spiral. Determine what caused the lost marks: knowledge gap,
+careless mistake, misunderstanding, time management, or insufficient practice.
+Then change your preparation.
+</p>
+</details>
+
+<details>
+<summary>I had a terrible day.</summary>
+<p class="muted">
+The next action matters more than the guilt. Start the next planned block.
+Never turn one bad day into two.
+</p>
+</details>
+
+<details>
+<summary>I have no motivation.</summary>
+<p class="muted">
+Motivation isn't required. The schedule decides what happens.
+Your job is to begin the block.
+</p>
+</details>
+
+</div>
+</section>
+
+
+<section>
+<div class="card">
+<h2>🔄 Reset Dashboard</h2>
+<p class="muted">
+Your checklist is saved automatically. Use this only if you want to start over.
+</p>
+<button class="btn danger" onclick="resetAll()">Reset Everything</button>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+    <p>4.0 Engineer Dashboard • Built for consistency, not perfection.</p>
+    <p>One good day → another good day → another good day.</p>
+</div>
+</footer>
+
+
+<div class="toast" id="toast">Saved</div>
+
+
+<!-- CATCH-UP MODAL -->
+<div class="modal" id="catchupModal">
+<div class="modal-content">
+
+<h2>🧠 Catch-Up Mode</h2>
+
+<p class="muted">
+Your goal is not perfect mastery. Your goal is enough understanding
+to successfully move to the next concept.
+</p>
+
+<label>
+<strong>1. What are you trying to learn?</strong>
+<br><br>
+<input type="text" id="catchTopic" placeholder="e.g. Newton's laws">
+</label>
+
+<br>
+
+<label>
+<strong>2. What specifically don't you understand?</strong>
+<br><br>
+<textarea id="catchGap" placeholder="e.g. I don't know when to use the normal force equation."></textarea>
+</label>
+
+<br>
+
+<label>
+<strong>3. What prerequisite might be missing?</strong>
+<br><br>
+<input type="text" id="catchPrereq" placeholder="e.g. Free-body diagrams">
+</label>
+
+<br><br>
+
+<div class="tip">
+<strong>20–30 minute rule:</strong>
+Study only the missing prerequisite. Then close your notes.
+Try to explain it or solve 2–3 basic problems.
+</div>
+
+<div class="checklist">
+
+<label class="check">
+<input type="checkbox" id="catchExplain">
+<span>I can explain the basic idea in my own words.</span>
+</label>
+
+<label class="check">
+<input type="checkbox" id="catchIdentify">
+<span>I can identify when the concept applies.</span>
+</label>
+
+<label class="check">
+<input type="checkbox" id="catchProblem">
+<span>I can solve a basic representative problem without copying.</span>
+</label>
+
+</div>
+
+<br>
+
+<button class="btn" onclick="finishCatchup()">Move On / Save for Later</button>
+<button class="btn secondary" onclick="closeModal()">Cancel</button>
+
+<div id="catchResult" style="margin-top:20px"></div>
+
+</div>
+</div>
+
+
+<script>
+
+/* =========================
+   STORAGE
+========================= */
+
+const STORAGE_KEY = "engineer4_dashboard_v1";
+
+let state = JSON.parse(
+    localStorage.getItem(STORAGE_KEY) ||
+    '{"checks":{}, "sessions":0, "streak":0, "lastStudyDate":null, "errors":[]}'
+);
+
+function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function toast(message) {
+    const el = document.getElementById("toast");
+    el.textContent = message;
+    el.classList.add("show");
+
+    setTimeout(() => {
+        el.classList.remove("show");
+    }, 1800);
+}
+
+
+/* =========================
+   CHECKLISTS
+========================= */
+
+function initializeChecks() {
+
+    const boxes = document.querySelectorAll(
+        'input[type="checkbox"]:not(#catchExplain):not(#catchIdentify):not(#catchProblem)'
+    );
+
+    boxes.forEach((box, index) => {
+
+        const key = "check_" + index;
+
+        box.dataset.key = key;
+
+        if (state.checks[key]) {
+            box.checked = true;
+            box.closest(".check")?.classList.add("done");
+        }
+
+        box.addEventListener("change", () => {
+
+            state.checks[key] = box.checked;
+
+            if (box.checked) {
+                box.closest(".check")?.classList.add("done");
+            } else {
+                box.closest(".check")?.classList.remove("done");
+            }
+
+            save();
+            updateProgress();
+
+        });
+    });
+}
+
+function updateProgress() {
+
+    const boxes = [...document.querySelectorAll(
+        'input[type="checkbox"]:not(#catchExplain):not(#catchIdentify):not(#catchProblem)'
+    )];
+
+    const done = boxes.filter(b => b.checked).length;
+    const total = boxes.length;
+
+    const percentage = total ? Math.round(done / total * 100) : 0;
+
+    document.getElementById("overallProgress").textContent = percentage + "%";
+    document.getElementById("mainProgress").style.width = percentage + "%";
+    document.getElementById("progressLabel").textContent =
+        `${done} of ${total} complete`;
+
+}
+
+
+/* =========================
+   NAV
+========================= */
+
+function scrollToId(id) {
+    document.getElementById(id)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+
+/* =========================
+   STUDY SESSION
+========================= */
+
+function completedStudySession() {
+
+    state.sessions++;
+
+    const today = new Date().toISOString().slice(0,10);
+
+    if (state.lastStudyDate !== today) {
+
+        if (state.lastStudyDate) {
+
+            const previous = new Date(state.lastStudyDate);
+            const current = new Date(today);
+
+            const difference =
+                Math.round((current - previous) / 86400000);
+
+            if (difference === 1) {
+                state.streak++;
+            } else {
+                state.streak = 1;
+            }
+
+        } else {
+            state.streak = 1;
+        }
+
+        state.lastStudyDate = today;
+    }
+
+    save();
+
+    document.getElementById("sessionsDone").textContent = state.sessions;
+    document.getElementById("streak").textContent = state.streak;
+
+    toast("Study session completed 🔥");
+}
+
+document.getElementById("sessionsDone").textContent = state.sessions;
+document.getElementById("streak").textContent = state.streak;
+
+
+/* =========================
+   TIMER
+========================= */
+
+let timerSeconds = 25 * 60;
+let timerInterval = null;
+let timerRunning = false;
+
+function updateTimerDisplay() {
+
+    const mins = Math.floor(timerSeconds / 60)
+        .toString().padStart(2, "0");
+
+    const secs = (timerSeconds % 60)
+        .toString().padStart(2, "0");
+
+    document.getElementById("time").textContent =
+        `${mins}:${secs}`;
+}
+
+function setTimer(minutes) {
+
+    pauseTimer();
+
+    timerSeconds = minutes * 60;
+
+    document.getElementById("timerStatus").textContent =
+        `${minutes}-minute focus`;
+
+    updateTimerDisplay();
+}
+
+function startTimer() {
+
+    if (timerRunning) return;
+
+    timerRunning = true;
+
+    document.getElementById("timerStatus").textContent =
+        "FOCUS — one task, no phone";
+
+    timerInterval = setInterval(() => {
+
+        timerSeconds--;
+
+        updateTimerDisplay();
+
+        if (timerSeconds <= 0) {
+
+            pauseTimer();
+
+            timerSeconds = 0;
+
+            updateTimerDisplay();
+
+            completedStudySession();
+
+            document.getElementById("timerStatus").textContent =
+                "Session complete 🎯";
+
+            if ("Notification" in window &&
+                Notification.permission === "granted") {
+
+                new Notification(
+                    "Study session complete",
+                    { body: "Take a short break, then decide whether to continue." }
+                );
+            }
+        }
+
+    }, 1000);
+}
+
+function pauseTimer() {
+
+    clearInterval(timerInterval);
+
+    timerRunning = false;
+
+    document.getElementById("timerStatus").textContent =
+        "Paused";
+
+}
+
+function resetTimer() {
+
+    pauseTimer();
+
+    timerSeconds = 25 * 60;
+
+    document.getElementById("timerStatus").textContent =
+        "Ready";
+
+    updateTimerDisplay();
+}
+
+updateTimerDisplay();
+
+
+/* =========================
+   CATCH-UP MODAL
+========================= */
+
+function openModal() {
+    document.getElementById("catchupModal")
+        .classList.add("active");
+}
+
+function closeModal() {
+    document.getElementById("catchupModal")
+        .classList.remove("active");
+}
+
+function finishCatchup() {
+
+    const topic = document.getElementById("catchTopic").value;
+    const gap = document.getElementById("catchGap").value;
+
+    const explain = document.getElementById("catchExplain").checked;
+    const identify = document.getElementById("catchIdentify").checked;
+    const problem = document.getElementById("catchProblem").checked;
+
+    const result = document.getElementById("catchResult");
+
+    if (!topic || !gap) {
+        result.innerHTML =
+            `<div class="tip">
+            Write the topic and the exact gap first.
+            "I don't understand physics" is too broad.
+            Try "I don't know how to choose the forces in my free-body diagram."
+            </div>`;
+        return;
+    }
+
+    if (explain && identify && problem) {
+
+        result.innerHTML =
+            `<div class="tip" style="border-color:var(--green)">
+            <strong>✅ MOVE ON.</strong><br>
+            You have reached minimum viable understanding.
+            Put this topic into your normal spaced-practice rotation.
+            </div>`;
+
+    } else {
+
+        result.innerHTML =
+            `<div class="tip" style="border-color:var(--yellow)">
+            <strong>🟡 NOT QUITE.</strong><br>
+            Spend another focused block on the missing piece.
+            Do not restart the entire chapter. Target the specific gap.
+            </div>`;
+
+    }
+
+    toast("Catch-up assessment saved");
+}
+
+
+/* =========================
+   ERROR LOG
+========================= */
+
+function addError() {
+
+    state.errors.push({
+        question: "",
+        cause: "",
+        fix: ""
+    });
+
+    save();
+
+    renderErrors();
+}
+
+function removeError(index) {
+
+    state.errors.splice(index, 1);
+
+    save();
+
+    renderErrors();
+}
+
+function renderErrors() {
+
+    const container =
+        document.getElementById("errorContainer");
+
+    if (!state.errors.length) {
+
+        container.innerHTML =
+            `<p class="muted">
+            No errors logged yet. When you miss a question,
+            record it here instead of simply looking at the answer.
+            </p>`;
+
+        return;
+    }
+
+    container.innerHTML = state.errors.map((error, index) => `
+
+        <div class="error-row">
+
+            <input
+                type="text"
+                placeholder="What did I get wrong?"
+                value="${escapeHTML(error.question)}"
+                oninput="updateError(${index}, 'question', this.value)"
+            >
+
+            <input
+                type="text"
+                placeholder="Why did I get it wrong?"
+                value="${escapeHTML(error.cause)}"
+                oninput="updateError(${index}, 'cause', this.value)"
+            >
+
+            <input
+                type="text"
+                placeholder="What will I do differently?"
+                value="${escapeHTML(error.fix)}"
+                oninput="updateError(${index}, 'fix', this.value)"
+            >
+
+            <button
+                class="btn danger"
+                onclick="removeError(${index})">
+                ×
+            </button>
+
+        </div>
+
+    `).join("");
+}
+
+function updateError(index, field, value) {
+
+    state.errors[index][field] = value;
+
+    save();
+}
+
+function escapeHTML(str) {
+
+    return String(str || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetAll() {
+
+    if (!confirm(
+        "Reset all checklist progress, study sessions, streak, and error log?"
+    )) return;
+
+    localStorage.removeItem(STORAGE_KEY);
+
+    location.reload();
+}
+
+
+/* =========================
+   KEYBOARD SHORTCUT
+========================= */
+
+document.addEventListener("keydown", e => {
+
+    if (e.key === "Escape") {
+        closeModal();
+    }
+
+});
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+initializeChecks();
+updateProgress();
+renderErrors();
+
+
+/* Optional browser notification permission */
+if ("Notification" in window &&
+    Notification.permission === "default") {
+
+    // Only ask after user interacts with the page.
+    document.addEventListener("click", () => {
+        Notification.requestPermission();
+    }, { once: true });
+}
+
+</script>
+
+</body>
+</html>
