@@ -7,15 +7,19 @@
 
 <style>
 :root {
-    --bg: #0b1020;
-    --card: #121a2f;
-    --card2: #18223b;
-    --text: #f4f7fb;
-    --muted: #9aa7bd;
-    --accent: #6ea8fe;
+    --bg: #090e1c;
+    --surface: #11192b;
+    --surface2: #18233a;
+    --surface3: #202d47;
+    --text: #f5f7fb;
+    --muted: #9aa8bf;
+
+    --blue: #6ea8fe;
     --green: #55d187;
     --yellow: #f5c451;
     --red: #ff6b6b;
+    --purple: #b18cff;
+
     --border: rgba(255,255,255,.08);
     --shadow: 0 20px 50px rgba(0,0,0,.25);
 }
@@ -24,13 +28,35 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    font-family: Inter, Arial, sans-serif;
-    background:
-        radial-gradient(circle at top left, rgba(110,168,254,.12), transparent 35%),
-        var(--bg);
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
     color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 10% 0%,
+            rgba(110,168,254,.14),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(177,140,255,.08),
+            transparent 25%
+        ),
+        var(--bg);
 }
 
 button,
@@ -49,15 +75,21 @@ button {
     margin: auto;
 }
 
-/* ================= HEADER ================= */
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 header {
-    padding: 30px 0 20px;
     position: sticky;
     top: 0;
-    z-index: 20;
-    backdrop-filter: blur(15px);
-    background: rgba(11,16,32,.85);
+    z-index: 50;
+
+    padding: 16px 0;
+
+    background: rgba(9,14,28,.82);
+    backdrop-filter: blur(18px);
+
     border-bottom: 1px solid var(--border);
 }
 
@@ -69,174 +101,245 @@ header {
 }
 
 .logo {
-    font-size: 1.35rem;
-    font-weight: 800;
+    font-weight: 900;
+    letter-spacing: -.5px;
 }
 
 .logo span {
-    color: var(--accent);
+    color: var(--blue);
 }
 
 .nav {
     display: flex;
-    gap: 8px;
+    gap: 7px;
     flex-wrap: wrap;
 }
 
 .nav button {
-    background: transparent;
-    color: var(--muted);
     border: 1px solid transparent;
-    padding: 9px 13px;
-    border-radius: 10px;
+    background: transparent;
+
+    color: var(--muted);
+
+    padding: 8px 12px;
+    border-radius: 9px;
 }
 
 .nav button:hover,
 .nav button.active {
+    background: var(--surface);
     color: white;
-    background: var(--card);
     border-color: var(--border);
 }
 
-/* ================= HERO ================= */
+
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero {
-    padding: 60px 0 40px;
+    padding: 65px 0 35px;
 }
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 1.5fr .8fr;
-    gap: 25px;
+    grid-template-columns: 1.45fr .8fr;
+    gap: 22px;
 }
 
 .hero-card {
-    background: linear-gradient(145deg, #172441, #10172b);
-    border: 1px solid var(--border);
-    border-radius: 25px;
-    padding: 35px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
+
+    padding: 40px;
+
+    border-radius: 25px;
+    border: 1px solid var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            #182743,
+            #0f172b
+        );
+
+    box-shadow: var(--shadow);
 }
 
 .hero-card::after {
     content: "";
+
     position: absolute;
-    width: 250px;
-    height: 250px;
+
+    width: 300px;
+    height: 300px;
+
+    right: -150px;
+    top: -150px;
+
     border-radius: 50%;
+
     background: rgba(110,168,254,.08);
-    right: -100px;
-    top: -100px;
 }
 
 .badge {
     display: inline-block;
-    background: rgba(110,168,254,.12);
-    border: 1px solid rgba(110,168,254,.2);
-    color: #9bc2ff;
+
     padding: 7px 12px;
+
     border-radius: 999px;
-    font-size: .8rem;
-    font-weight: 700;
+
+    background: rgba(110,168,254,.1);
+
+    border: 1px solid rgba(110,168,254,.2);
+
+    color: #a8c8ff;
+
+    font-size: .78rem;
+    font-weight: 800;
 }
 
 h1 {
-    font-size: clamp(2.2rem, 6vw, 4.5rem);
-    margin: 18px 0;
-    line-height: .98;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: .95;
+
+    letter-spacing: -3px;
+
+    margin: 20px 0;
 }
 
-.hero p {
+.hero-card p {
     color: var(--muted);
+
     max-width: 650px;
-    font-size: 1.05rem;
+
     line-height: 1.7;
+
+    font-size: 1.05rem;
 }
 
 .identity {
     margin-top: 25px;
-    font-size: 1.15rem;
-    font-weight: 700;
+
+    font-weight: 800;
 }
 
 .identity span {
-    color: var(--accent);
+    color: var(--blue);
 }
 
-/* ================= CARDS ================= */
+
+/* =====================================================
+   GENERAL CARDS
+===================================================== */
 
 .card {
-    background: var(--card);
+    background: var(--surface);
+
     border: 1px solid var(--border);
+
     border-radius: 18px;
-    padding: 22px;
+
+    padding: 23px;
+
     box-shadow: var(--shadow);
 }
 
-.card h2,
-.card h3 {
+.card h2 {
     margin-top: 0;
+
+    letter-spacing: -.5px;
+}
+
+.card h3 {
+    margin-bottom: 8px;
 }
 
 .muted {
     color: var(--muted);
+    line-height: 1.6;
 }
-
-/* ================= STATS ================= */
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 15px;
-}
-
-.stat {
-    padding: 22px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-}
-
-.stat-number {
-    font-size: 2rem;
-    font-weight: 800;
-}
-
-.stat-label {
-    color: var(--muted);
-    margin-top: 5px;
-}
-
-/* ================= DASHBOARD GRID ================= */
 
 .dashboard {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
     gap: 20px;
-    padding-bottom: 60px;
+
+    padding-bottom: 25px;
 }
 
 .full {
     grid-column: 1 / -1;
 }
 
-/* ================= PRIORITY ================= */
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.stat {
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 2rem;
+
+    font-weight: 900;
+}
+
+.stat-label {
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: .9rem;
+}
+
+
+/* =====================================================
+   PRIORITIES
+===================================================== */
 
 .priority {
     display: flex;
+
     align-items: center;
-    gap: 15px;
-    padding: 15px;
-    border-radius: 14px;
-    margin: 10px 0;
-    background: var(--card2);
+
+    gap: 13px;
+
+    padding: 14px;
+
+    margin: 9px 0;
+
+    border-radius: 13px;
+
+    background: var(--surface2);
 }
 
 .priority-dot {
-    width: 12px;
-    height: 12px;
+    width: 11px;
+    height: 11px;
+
+    min-width: 11px;
+
     border-radius: 50%;
 }
 
@@ -252,6 +355,14 @@ h1 {
     background: var(--green);
 }
 
+.blue {
+    background: var(--blue);
+}
+
+.purple {
+    background: var(--purple);
+}
+
 .priority strong {
     display: block;
 }
@@ -260,166 +371,376 @@ h1 {
     color: var(--muted);
 }
 
-/* ================= CHECKLIST ================= */
+
+/* =====================================================
+   CHECKLIST
+===================================================== */
 
 .checklist {
     display: flex;
+
     flex-direction: column;
-    gap: 10px;
+
+    gap: 9px;
 }
 
 .check-item {
     display: flex;
+
     align-items: center;
-    gap: 12px;
-    background: var(--card2);
-    padding: 14px;
-    border-radius: 12px;
+
+    gap: 11px;
+
+    padding: 13px;
+
+    border-radius: 11px;
+
+    background: var(--surface2);
+
+    transition: .2s;
+}
+
+.check-item:hover {
+    background: var(--surface3);
 }
 
 .check-item input {
-    width: 19px;
-    height: 19px;
-    accent-color: var(--accent);
+    width: 18px;
+    height: 18px;
+
+    accent-color: var(--blue);
 }
 
 .check-item.completed {
-    opacity: .55;
+    opacity: .5;
+
     text-decoration: line-through;
 }
 
-/* ================= PROGRESS ================= */
 
-.progress {
-    width: 100%;
-    height: 12px;
-    background: #202b45;
-    border-radius: 999px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: var(--accent);
-    transition: width .4s ease;
-}
-
-/* ================= BUTTONS ================= */
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 .btn {
     border: none;
+
     padding: 11px 16px;
+
     border-radius: 10px;
-    background: var(--accent);
-    color: #07101f;
-    font-weight: 800;
+
+    background: var(--blue);
+
+    color: #07101d;
+
+    font-weight: 850;
+}
+
+.btn:hover {
+    filter: brightness(1.08);
 }
 
 .btn.secondary {
-    background: var(--card2);
-    color: white;
+    background: var(--surface2);
+
     border: 1px solid var(--border);
+
+    color: white;
 }
 
-.btn.danger {
-    background: rgba(255,107,107,.15);
-    color: #ff9a9a;
+.btn.green {
+    background: var(--green);
+
+    color: #07150d;
 }
 
-/* ================= TIMER ================= */
+.btn.red {
+    background: rgba(255,107,107,.13);
+
+    color: #ff9999;
+}
+
+
+/* =====================================================
+   ALERT
+===================================================== */
+
+.alert {
+    padding: 15px;
+
+    margin-top: 15px;
+
+    border-radius: 13px;
+
+    background: rgba(245,196,81,.08);
+
+    border: 1px solid rgba(245,196,81,.18);
+
+    color: #f7d979;
+
+    line-height: 1.6;
+}
+
+.alert.blue-alert {
+    background: rgba(110,168,254,.08);
+
+    border-color: rgba(110,168,254,.18);
+
+    color: #a8c8ff;
+}
+
+.alert.green-alert {
+    background: rgba(85,209,135,.08);
+
+    border-color: rgba(85,209,135,.18);
+
+    color: #88e7a8;
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
 
 .timer {
     text-align: center;
-    padding: 20px;
+
+    padding: 10px;
 }
 
 .timer-display {
     font-size: 4rem;
-    font-weight: 800;
+
+    font-weight: 900;
+
+    letter-spacing: -3px;
+
     margin: 15px 0;
 }
 
 .timer-buttons {
     display: flex;
+
     justify-content: center;
-    gap: 10px;
+
     flex-wrap: wrap;
+
+    gap: 8px;
 }
 
-/* ================= ERROR LOG ================= */
+
+/* =====================================================
+   INPUTS
+===================================================== */
 
 textarea,
 input[type="text"],
 input[type="number"],
 select {
     width: 100%;
-    background: #0d1528;
-    border: 1px solid var(--border);
-    color: white;
-    border-radius: 10px;
+
     padding: 12px;
-    margin: 7px 0 12px;
+
+    margin: 6px 0 12px;
+
+    color: white;
+
+    background: #0b1324;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    outline: none;
 }
 
 textarea {
     min-height: 90px;
+
     resize: vertical;
 }
 
-.error {
-    background: var(--card2);
-    padding: 15px;
-    border-radius: 12px;
-    margin-top: 10px;
+textarea:focus,
+input:focus,
+select:focus {
+    border-color: rgba(110,168,254,.6);
 }
 
-.error strong {
-    color: #ff9a9a;
-}
 
-/* ================= INTERNSHIP ================= */
+/* =====================================================
+   INTERNSHIP
+===================================================== */
 
 .internship-banner {
     background:
-        linear-gradient(135deg, rgba(85,209,135,.12), rgba(110,168,254,.08)),
-        var(--card);
-    border: 1px solid rgba(85,209,135,.2);
+        linear-gradient(
+            135deg,
+            rgba(85,209,135,.09),
+            rgba(110,168,254,.08)
+        ),
+        var(--surface);
 }
 
 .phase {
     display: flex;
-    gap: 15px;
-    padding: 16px;
-    border-radius: 14px;
-    background: var(--card2);
-    margin-top: 10px;
-}
 
-.phase-number {
-    min-width: 35px;
-    height: 35px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: rgba(110,168,254,.15);
-    color: #9bc2ff;
-    font-weight: 800;
+    gap: 14px;
+
+    padding: 15px;
+
+    margin-top: 9px;
+
+    border-radius: 13px;
+
+    background: var(--surface2);
+
+    border: 1px solid transparent;
 }
 
 .phase.active {
-    border: 1px solid rgba(110,168,254,.3);
+    border-color: rgba(110,168,254,.25);
 }
 
-.project-progress {
-    margin-top: 20px;
+.phase-number {
+    display: grid;
+
+    place-items: center;
+
+    min-width: 35px;
+    height: 35px;
+
+    border-radius: 50%;
+
+    background: rgba(110,168,254,.13);
+
+    color: #a8c8ff;
+
+    font-weight: 900;
 }
+
+
+/* =====================================================
+   AI CENTER
+===================================================== */
+
+.ai-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.ai-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(177,140,255,.1);
+
+    border: 1px solid rgba(177,140,255,.2);
+
+    color: #c6adff;
+
+    font-size: .78rem;
+
+    font-weight: 800;
+}
+
+.responsibility-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+
+    margin-top: 18px;
+}
+
+.responsibility {
+    padding: 18px;
+
+    border-radius: 15px;
+
+    background: var(--surface2);
+}
+
+.responsibility h3 {
+    margin-top: 0;
+}
+
+.responsibility ul {
+    margin: 10px 0 0;
+
+    padding-left: 20px;
+
+    color: var(--muted);
+
+    line-height: 1.8;
+}
+
+.ai-do {
+    border-top: 3px solid var(--purple);
+}
+
+.you-do {
+    border-top: 3px solid var(--green);
+}
+
+
+/* =====================================================
+   STANDARDS
+===================================================== */
+
+.standard-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+.standard {
+    padding: 17px;
+
+    border-radius: 14px;
+
+    background: var(--surface2);
+
+    border: 1px solid var(--border);
+}
+
+.standard strong {
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+
+/* =====================================================
+   PROJECT PHASES
+===================================================== */
 
 .project-step {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
-    padding: 11px 0;
+
+    padding: 12px 0;
+
     border-bottom: 1px solid var(--border);
 }
 
@@ -427,28 +748,74 @@ textarea {
     border-bottom: none;
 }
 
-/* ================= ALERT ================= */
+.project-step input {
+    width: 18px;
+    height: 18px;
 
-.alert {
-    padding: 16px;
-    border-radius: 14px;
-    background: rgba(245,196,81,.1);
-    border: 1px solid rgba(245,196,81,.2);
-    color: #f8d878;
-    margin-top: 15px;
+    accent-color: var(--green);
 }
 
-/* ================= MODAL ================= */
+
+/* =====================================================
+   CODE REVIEW
+===================================================== */
+
+.review-item {
+    padding: 14px;
+
+    margin: 8px 0;
+
+    border-radius: 12px;
+
+    background: var(--surface2);
+}
+
+.review-item strong {
+    display: block;
+
+    margin-bottom: 4px;
+}
+
+
+/* =====================================================
+   ERROR LOG
+===================================================== */
+
+.error {
+    padding: 15px;
+
+    margin-top: 10px;
+
+    border-radius: 12px;
+
+    background: var(--surface2);
+}
+
+.error strong {
+    color: #ff9a9a;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
 
 .modal {
     display: none;
+
     position: fixed;
+
     inset: 0;
-    background: rgba(0,0,0,.7);
+
     z-index: 100;
-    align-items: center;
-    justify-content: center;
+
     padding: 20px;
+
+    background: rgba(0,0,0,.72);
+
+    align-items: center;
+
+    justify-content: center;
 }
 
 .modal.show {
@@ -456,18 +823,31 @@ textarea {
 }
 
 .modal-content {
-    background: var(--card);
-    width: min(600px, 100%);
-    border-radius: 20px;
+    width: min(620px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
     padding: 25px;
+
+    border-radius: 20px;
+
+    background: var(--surface);
+
     border: 1px solid var(--border);
 }
 
-/* ================= RESPONSIVE ================= */
 
-@media(max-width: 850px) {
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width: 900px) {
+
     .hero-grid,
-    .dashboard {
+    .dashboard,
+    .responsibility-grid {
         grid-template-columns: 1fr;
     }
 
@@ -475,114 +855,272 @@ textarea {
         grid-column: auto;
     }
 
-    .stats {
+    .stats,
+    .standard-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width: 600px) {
+
+    .stats,
+    .standard-grid {
         grid-template-columns: 1fr;
     }
 
     .header-inner {
-        flex-direction: column;
         align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .hero-card {
+        padding: 27px;
+    }
+
+    h1 {
+        letter-spacing: -2px;
     }
 }
 </style>
 </head>
 
+
 <body>
 
-<header>
-    <div class="container header-inner">
-        <div class="logo">4.0 <span>ENGINEER</span></div>
 
-        <div class="nav">
-            <button class="active" onclick="scrollToSection('dashboard')">Dashboard</button>
-            <button onclick="scrollToSection('internship')">Internship</button>
-            <button onclick="scrollToSection('catchup')">Catch-Up</button>
-            <button onclick="scrollToSection('errors')">Errors</button>
-        </div>
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+<div class="container header-inner">
+
+    <div class="logo">
+        4.0 <span>ENGINEER</span>
     </div>
+
+    <div class="nav">
+
+        <button
+            class="active"
+            onclick="scrollToSection('dashboard')">
+            Dashboard
+        </button>
+
+        <button
+            onclick="scrollToSection('ai')">
+            AI Development
+        </button>
+
+        <button
+            onclick="scrollToSection('internship')">
+            Internship
+        </button>
+
+        <button
+            onclick="scrollToSection('catchup')">
+            Catch-Up
+        </button>
+
+        <button
+            onclick="scrollToSection('errors')">
+            Errors
+        </button>
+
+    </div>
+
+</div>
+
 </header>
+
 
 <main>
 
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
 <section class="hero">
-    <div class="container hero-grid">
 
-        <div class="hero-card">
-            <span class="badge">FIRST-YEAR ENGINEERING • 2026–27</span>
+<div class="container hero-grid">
 
-            <h1>
-                Build the<br>
-                <span style="color:var(--accent)">4.0 Engineer.</span>
-            </h1>
 
-            <p>
-                Your goal isn't to study all day.
-                Your goal is to consistently execute the things
-                that move your grades and your future forward.
-            </p>
+    <div class="hero-card">
 
-            <div class="identity">
-                Ask yourself:
-                <span>"What would the 4.0 Engineer do right now?"</span>
-            </div>
-        </div>
+        <span class="badge">
+            FIRST-YEAR ENGINEERING • 2026–27
+        </span>
 
-        <div class="card">
-            <h3>Today's Mission</h3>
+        <h1>
+            Build the<br>
+            <span style="color:var(--blue)">
+                4.0 Engineer.
+            </span>
+        </h1>
 
-            <div class="priority">
-                <div class="priority-dot red"></div>
-                <div>
-                    <strong>Academic Priority</strong>
-                    <small>Exam / assessment within 7 days</small>
-                </div>
-            </div>
+        <p>
+            Your goal isn't to study every waking hour.
+            Your goal is to consistently execute the actions
+            that improve your grades, technical ability and
+            future opportunities.
+        </p>
 
-            <div class="priority">
-                <div class="priority-dot yellow"></div>
-                <div>
-                    <strong>Maintenance</strong>
-                    <small>Keep future exams from becoming emergencies</small>
-                </div>
-            </div>
+        <div class="identity">
 
-            <div class="priority">
-                <div class="priority-dot green"></div>
-                <div>
-                    <strong>Career</strong>
-                    <small>Internship preparation — only after academics</small>
-                </div>
-            </div>
+            Ask yourself:
 
-            <div class="alert">
-                <strong>Rule:</strong>
-                If a project starts hurting your grades,
-                reduce project time first.
-            </div>
+            <span>
+                "What would the 4.0 Engineer do right now?"
+            </span>
+
         </div>
 
     </div>
+
+
+    <div class="card">
+
+        <h2>Today's Hierarchy</h2>
+
+        <div class="priority">
+
+            <div class="priority-dot red"></div>
+
+            <div>
+                <strong>1. Academics</strong>
+
+                <small>
+                    Classes, assignments and exams
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot yellow"></div>
+
+            <div>
+                <strong>2. Sleep & Recovery</strong>
+
+                <small>
+                    Protect tomorrow's performance
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+                <strong>3. Career</strong>
+
+                <small>
+                    Project + internship preparation
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="alert">
+
+            <strong>
+                Midterm rule:
+            </strong>
+
+            If an exam is within 7 days,
+            career work can temporarily drop to zero.
+
+        </div>
+
+    </div>
+
+
+</div>
+
 </section>
 
 
-<section id="dashboard" class="container dashboard">
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section
+    id="dashboard"
+    class="container dashboard">
+
 
     <div class="stats full">
 
-        <div class="stat">
-            <div class="stat-number" id="checkCount">0</div>
-            <div class="stat-label">Tasks completed</div>
-        </div>
 
         <div class="stat">
-            <div class="stat-number" id="errorCount">0</div>
-            <div class="stat-label">Errors logged</div>
+
+            <div
+                class="stat-number"
+                id="checkCount">
+                0
+            </div>
+
+            <div class="stat-label">
+                Daily tasks complete
+            </div>
+
         </div>
 
+
         <div class="stat">
-            <div class="stat-number" id="projectHours">0h</div>
-            <div class="stat-label">Project time this week</div>
+
+            <div
+                class="stat-number"
+                id="errorCount">
+                0
+            </div>
+
+            <div class="stat-label">
+                Errors logged
+            </div>
+
         </div>
+
+
+        <div class="stat">
+
+            <div
+                class="stat-number"
+                id="projectHours">
+                0h
+            </div>
+
+            <div class="stat-label">
+                Project hours this week
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div
+                class="stat-number"
+                id="projectProgress">
+                0%
+            </div>
+
+            <div class="stat-label">
+                Project complete
+            </div>
+
+        </div>
+
 
     </div>
 
@@ -590,660 +1128,2367 @@ textarea {
     <!-- DAILY CHECKLIST -->
 
     <div class="card">
-        <h2>Today's 4.0 Checklist</h2>
+
+        <h2>
+            Today's 4.0 Checklist
+        </h2>
+
         <p class="muted">
-            Don't chase hours. Chase completed actions.
+            Measure execution, not how long you sat at your desk.
         </p>
 
-        <div class="checklist" id="checklist">
+
+        <div
+            class="checklist"
+            id="checklist">
+
 
             <label class="check-item">
+
                 <input type="checkbox">
+
                 Attend / watch every lecture
+
             </label>
 
+
             <label class="check-item">
+
                 <input type="checkbox">
+
                 Review today's material
+
             </label>
 
+
             <label class="check-item">
+
                 <input type="checkbox">
+
                 Attempt problems without AI first
+
             </label>
 
+
             <label class="check-item">
+
                 <input type="checkbox">
+
                 Complete today's highest-priority task
+
             </label>
 
+
             <label class="check-item">
+
                 <input type="checkbox">
+
                 Resolve at least one knowledge gap
+
             </label>
 
+
             <label class="check-item">
+
                 <input type="checkbox">
+
                 Update error log
+
             </label>
 
+
             <label class="check-item">
+
                 <input type="checkbox">
+
                 Prepare tomorrow's priorities
+
             </label>
+
 
             <label class="check-item">
+
                 <input type="checkbox">
-                Sleep enough to perform tomorrow
+
+                Protect sleep
+
             </label>
 
-        </div>
-    </div>
 
-
-    <!-- STUDY SYSTEM -->
-
-    <div class="card">
-        <h2>The Study Loop</h2>
-
-        <div class="priority">
-            <div class="priority-dot blue"></div>
-            <div>
-                <strong>1. Learn</strong>
-                <small>Lecture, textbook, example</small>
-            </div>
-        </div>
-
-        <div class="priority">
-            <div class="priority-dot blue"></div>
-            <div>
-                <strong>2. Close the notes</strong>
-                <small>Recall the idea yourself</small>
-            </div>
-        </div>
-
-        <div class="priority">
-            <div class="priority-dot blue"></div>
-            <div>
-                <strong>3. Solve</strong>
-                <small>Do representative problems</small>
-            </div>
-        </div>
-
-        <div class="priority">
-            <div class="priority-dot blue"></div>
-            <div>
-                <strong>4. Diagnose</strong>
-                <small>Find exactly where you failed</small>
-            </div>
-        </div>
-
-        <div class="priority">
-            <div class="priority-dot blue"></div>
-            <div>
-                <strong>5. Retry later</strong>
-                <small>Prove that you actually learned it</small>
-            </div>
         </div>
 
     </div>
 
 
-    <!-- PRIORITY SYSTEM -->
+
+    <!-- PRIORITY -->
 
     <div class="card">
-        <h2>Academic Priority</h2>
+
+        <h2>
+            Academic Priority
+        </h2>
+
 
         <div class="priority">
+
             <div class="priority-dot red"></div>
+
             <div>
-                <strong>RED — Exam < 7 days</strong>
-                <small>Heavy preparation</small>
+
+                <strong>
+                    RED — Exam < 7 days
+                </strong>
+
+                <small>
+                    Heavy preparation
+                </small>
+
             </div>
+
         </div>
 
+
         <div class="priority">
+
             <div class="priority-dot yellow"></div>
+
             <div>
-                <strong>YELLOW — Exam 1–3 weeks</strong>
-                <small>Maintenance + gradual increase</small>
+
+                <strong>
+                    YELLOW — Exam 1–3 weeks
+                </strong>
+
+                <small>
+                    Maintenance + gradual increase
+                </small>
+
             </div>
+
         </div>
 
+
         <div class="priority">
+
             <div class="priority-dot green"></div>
+
             <div>
-                <strong>GREEN — Exam > 3 weeks</strong>
-                <small>Stay current with class</small>
+
+                <strong>
+                    GREEN — Exam > 3 weeks
+                </strong>
+
+                <small>
+                    Stay current
+                </small>
+
             </div>
+
         </div>
+
 
         <div class="alert">
-            <strong>Prioritize — don't postpone.</strong>
-            You can postpone deep study, but don't allow
-            confusion to accumulate for weeks.
+
+            <strong>
+                Prioritize — don't postpone.
+            </strong>
+
+            You can postpone deep study,
+            but don't allow confusion to
+            accumulate for weeks.
+
         </div>
+
     </div>
+
+
+
+    <!-- STUDY LOOP -->
+
+    <div class="card">
+
+        <h2>
+            The Study Loop
+        </h2>
+
+
+        <div class="priority">
+
+            <div class="priority-dot blue"></div>
+
+            <div>
+
+                <strong>
+                    1. Learn
+                </strong>
+
+                <small>
+                    Lecture / textbook / example
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot blue"></div>
+
+            <div>
+
+                <strong>
+                    2. Recall
+                </strong>
+
+                <small>
+                    Close notes and explain it
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot blue"></div>
+
+            <div>
+
+                <strong>
+                    3. Solve
+                </strong>
+
+                <small>
+                    Do representative problems
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot blue"></div>
+
+            <div>
+
+                <strong>
+                    4. Diagnose
+                </strong>
+
+                <small>
+                    Identify the exact mistake
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot blue"></div>
+
+            <div>
+
+                <strong>
+                    5. Retry
+                </strong>
+
+                <small>
+                    Prove you can do it later
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
 
 
     <!-- TIMER -->
 
     <div class="card">
-        <h2>Focus Timer</h2>
+
+        <h2>
+            Focus Timer
+        </h2>
+
 
         <div class="timer">
 
-            <div class="timer-display" id="timer">50:00</div>
+            <div
+                class="timer-display"
+                id="timer">
+                50:00
+            </div>
+
 
             <div class="timer-buttons">
-                <button class="btn" onclick="startTimer()">Start</button>
-                <button class="btn secondary" onclick="pauseTimer()">Pause</button>
-                <button class="btn secondary" onclick="resetTimer()">Reset</button>
-                <button class="btn secondary" onclick="setTimer(25)">25 min</button>
-                <button class="btn secondary" onclick="setTimer(50)">50 min</button>
+
+                <button
+                    class="btn"
+                    onclick="startTimer()">
+                    Start
+                </button>
+
+                <button
+                    class="btn secondary"
+                    onclick="pauseTimer()">
+                    Pause
+                </button>
+
+                <button
+                    class="btn secondary"
+                    onclick="resetTimer()">
+                    Reset
+                </button>
+
+                <button
+                    class="btn secondary"
+                    onclick="setTimer(25)">
+                    25 min
+                </button>
+
+                <button
+                    class="btn secondary"
+                    onclick="setTimer(50)">
+                    50 min
+                </button>
+
             </div>
 
         </div>
+
     </div>
+
 
 </section>
 
 
-<!-- INTERNSHIP TRACK -->
 
-<section id="internship" class="container dashboard">
+<!-- =====================================================
+     AI DEVELOPMENT CENTER
+===================================================== -->
 
-    <div class="card internship-banner full">
+<section
+    id="ai"
+    class="container dashboard">
 
-        <span class="badge">CAREER TRACK</span>
 
-        <h2>Summer 2027 Internship Track</h2>
+    <div class="card full">
+
+        <div class="ai-header">
+
+            <div>
+
+                <span class="ai-label">
+                    🤖 AI DEVELOPMENT CENTER
+                </span>
+
+                <h2>
+                    AI-Assisted ≠ AI-Built
+                </h2>
+
+            </div>
+
+        </div>
+
 
         <p class="muted">
-            Your career matters — but your GPA comes first.
-            Build your internship profile gradually instead of
-            sacrificing your academic performance.
+
+            Modern development increasingly involves AI-assisted coding.
+            The goal of this project is not to avoid AI.
+            The goal is to learn how to use AI while maintaining
+            engineering judgment, testing, security awareness and
+            ownership of the final product.
+
         </p>
 
-        <div class="alert">
-            <strong>Core rule:</strong>
-            GPA → assignments → exams → sleep → internship project.
-            If academics become overloaded, the project pauses.
+
+        <div class="alert blue-alert">
+
+            <strong>
+                Project standard:
+            </strong>
+
+            AI can accelerate implementation.
+            You remain responsible for requirements,
+            architecture, correctness, testing, security,
+            decisions and final code quality.
+
+        </div>
+
+
+        <div class="responsibility-grid">
+
+
+            <!-- AI -->
+
+            <div class="responsibility ai-do">
+
+                <h3>
+                    🤖 AI SHOULD DO
+                </h3>
+
+
+                <ul>
+
+                    <li>
+                        Generate boilerplate code
+                    </li>
+
+                    <li>
+                        Create initial component implementations
+                    </li>
+
+                    <li>
+                        Suggest database schemas
+                    </li>
+
+                    <li>
+                        Generate test cases
+                    </li>
+
+                    <li>
+                        Explain unfamiliar APIs
+                    </li>
+
+                    <li>
+                        Find potential bugs
+                    </li>
+
+                    <li>
+                        Suggest refactors
+                    </li>
+
+                    <li>
+                        Generate documentation drafts
+                    </li>
+
+                    <li>
+                        Help debug errors
+                    </li>
+
+                    <li>
+                        Review pull requests
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- HUMAN -->
+
+            <div class="responsibility you-do">
+
+                <h3>
+                    🧠 YOU SHOULD DO
+                </h3>
+
+
+                <ul>
+
+                    <li>
+                        Define the actual problem
+                    </li>
+
+                    <li>
+                        Decide what features matter
+                    </li>
+
+                    <li>
+                        Design the architecture
+                    </li>
+
+                    <li>
+                        Understand generated code
+                    </li>
+
+                    <li>
+                        Verify calculations
+                    </li>
+
+                    <li>
+                        Test edge cases
+                    </li>
+
+                    <li>
+                        Review security implications
+                    </li>
+
+                    <li>
+                        Choose between competing approaches
+                    </li>
+
+                    <li>
+                        Debug failures
+                    </li>
+
+                    <li>
+                        Make the final decision
+                    </li>
+
+                </ul>
+
+            </div>
+
+
         </div>
 
     </div>
+
+
+
+    <!-- AI WORKFLOW -->
+
+    <div class="card full">
+
+        <h2>
+            🔄 AI Development Workflow
+        </h2>
+
+        <p class="muted">
+            Every meaningful feature should follow this loop.
+        </p>
+
+
+        <div class="phase active">
+
+            <div class="phase-number">
+                1
+            </div>
+
+            <div>
+
+                <strong>
+                    YOU — Define the requirement
+                </strong>
+
+                <p class="muted">
+
+                    Write what the feature should do,
+                    what inputs it receives,
+                    what outputs are expected,
+                    and what edge cases matter.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                2
+            </div>
+
+            <div>
+
+                <strong>
+                    AI — Propose an implementation
+                </strong>
+
+                <p class="muted">
+
+                    Ask AI for an implementation,
+                    alternatives and potential tradeoffs.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                3
+            </div>
+
+            <div>
+
+                <strong>
+                    YOU — Understand it
+                </strong>
+
+                <p class="muted">
+
+                    Ask AI to explain unfamiliar sections.
+                    Do not accept code you cannot explain.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                4
+            </div>
+
+            <div>
+
+                <strong>
+                    YOU + AI — Test it
+                </strong>
+
+                <p class="muted">
+
+                    Run automated tests,
+                    manual tests and edge cases.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                5
+            </div>
+
+            <div>
+
+                <strong>
+                    AI — Review it
+                </strong>
+
+                <p class="muted">
+
+                    Ask AI to aggressively look for bugs,
+                    security problems, maintainability issues
+                    and missing tests.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                6
+            </div>
+
+            <div>
+
+                <strong>
+                    YOU — Accept, reject or modify
+                </strong>
+
+                <p class="muted">
+
+                    Never blindly accept AI recommendations.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                7
+            </div>
+
+            <div>
+
+                <strong>
+                    YOU — Commit a clean change
+                </strong>
+
+                <p class="muted">
+
+                    Keep changes small enough that you can
+                    explain them in an interview.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- AI PROMPT LIBRARY -->
+
+    <div class="card full">
+
+        <h2>
+            🧠 AI Prompt Library
+        </h2>
+
+        <p class="muted">
+            Use AI as a senior engineer, reviewer and teacher —
+            not as an unquestioned code generator.
+        </p>
+
+
+        <div class="review-item">
+
+            <strong>
+                Architecture
+            </strong>
+
+            "Before writing code, propose 2–3 architectures
+            for this feature. Compare their tradeoffs,
+            complexity and maintainability."
+
+        </div>
+
+
+        <div class="review-item">
+
+            <strong>
+                Explain
+            </strong>
+
+            "Explain this code to me as if I need to defend
+            this implementation in a technical interview.
+            Identify anything I should understand deeply."
+
+        </div>
+
+
+        <div class="review-item">
+
+            <strong>
+                Testing
+            </strong>
+
+            "Create a comprehensive test plan for this feature.
+            Include normal cases, edge cases, invalid input,
+            boundary values and failure states."
+
+        </div>
+
+
+        <div class="review-item">
+
+            <strong>
+                Security
+            </strong>
+
+            "Review this implementation for authentication,
+            authorization, injection, data exposure,
+            insecure dependencies and other security risks."
+
+        </div>
+
+
+        <div class="review-item">
+
+            <strong>
+                Code Review
+            </strong>
+
+            "Review this change as a senior engineer.
+            Do not rewrite everything. Identify correctness,
+            maintainability, performance and security problems."
+
+        </div>
+
+
+        <div class="review-item">
+
+            <strong>
+                Challenge Me
+            </strong>
+
+            "Ask me five technical questions about this
+            implementation that an interviewer could ask.
+            Do not give me the answers until I respond."
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- CURRENT STANDARDS -->
+
+    <div class="card full">
+
+        <h2>
+            🛡️ Engineering Quality Standards
+        </h2>
+
+        <p class="muted">
+            These are the standards the project should aim for
+            before you call it portfolio-ready.
+        </p>
+
+
+        <div class="standard-grid">
+
+
+            <div class="standard">
+
+                <strong>
+                    🧪 Testing
+                </strong>
+
+                Unit + integration tests
+                for important logic.
+
+            </div>
+
+
+            <div class="standard">
+
+                <strong>
+                    🔐 Security
+                </strong>
+
+                Validate input,
+                protect user data,
+                avoid exposed secrets.
+
+            </div>
+
+
+            <div class="standard">
+
+                <strong>
+                    🧹 Code Quality
+                </strong>
+
+                Clear naming,
+                modular components,
+                linting and formatting.
+
+            </div>
+
+
+            <div class="standard">
+
+                <strong>
+                    📦 Dependencies
+                </strong>
+
+                Know why each major
+                dependency exists.
+
+            </div>
+
+
+            <div class="standard">
+
+                <strong>
+                    🌐 Accessibility
+                </strong>
+
+                Keyboard navigation,
+                labels, contrast and semantic HTML.
+
+            </div>
+
+
+            <div class="standard">
+
+                <strong>
+                    📱 Responsive
+                </strong>
+
+                Laptop, tablet and
+                mobile layouts.
+
+            </div>
+
+
+            <div class="standard">
+
+                <strong>
+                    ⚡ Performance
+                </strong>
+
+                Avoid unnecessary
+                requests and expensive work.
+
+            </div>
+
+
+            <div class="standard">
+
+                <strong>
+                    🔄 Git
+                </strong>
+
+                Small meaningful commits
+                and useful commit messages.
+
+            </div>
+
+
+            <div class="standard">
+
+                <strong>
+                    🚀 Deployment
+                </strong>
+
+                GitHub → Vercel →
+                production environment.
+
+            </div>
+
+
+        </div>
+
+
+        <div class="alert green-alert">
+
+            <strong>
+                Portfolio standard:
+            </strong>
+
+            You should be able to explain every major
+            architectural decision in the project.
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     INTERNSHIP
+===================================================== -->
+
+<section
+    id="internship"
+    class="container dashboard">
+
+
+    <div class="card internship-banner full">
+
+        <span class="badge">
+            SUMMER 2027
+        </span>
+
+        <h2>
+            Internship Preparation
+        </h2>
+
+        <p class="muted">
+
+            You are undecided on engineering discipline,
+            so build a broad technical project that demonstrates
+            problem-solving, software development, data handling,
+            testing and engineering thinking.
+
+        </p>
+
+
+        <div class="alert">
+
+            <strong>
+                GPA comes first.
+            </strong>
+
+            During midterm periods,
+            project work can drop to zero.
+
+        </div>
+
+    </div>
+
 
 
     <!-- PROJECT -->
 
     <div class="card">
 
-        <h2>🎯 Main Portfolio Project</h2>
+        <h2>
+            🎯 Portfolio Project
+        </h2>
 
-        <h3>Student Engineering Performance Dashboard</h3>
+        <h3>
+            Student Engineering Performance Dashboard
+        </h3>
 
         <p class="muted">
-            Build a real application that helps students track
-            courses, grades, assessments, deadlines, study time,
-            weaknesses and grade trajectories.
+
+            A responsive web application that helps students
+            understand their grades, upcoming assessments,
+            study priorities and academic trajectory.
+
         </p>
 
-        <h3>Technical Components</h3>
+
+        <h3>
+            Core Features
+        </h3>
+
 
         <div class="project-step">
-            <input type="checkbox" class="project-check">
-            Course / assessment database
+
+            <input
+                type="checkbox"
+                class="project-check">
+
+            Course management
+
         </div>
 
-        <div class="project-step">
-            <input type="checkbox" class="project-check">
-            Grade calculator
-        </div>
 
         <div class="project-step">
-            <input type="checkbox" class="project-check">
+
+            <input
+                type="checkbox"
+                class="project-check">
+
+            Assessment weighting
+
+        </div>
+
+
+        <div class="project-step">
+
+            <input
+                type="checkbox"
+                class="project-check">
+
             Grade trajectory calculator
+
         </div>
 
+
         <div class="project-step">
-            <input type="checkbox" class="project-check">
+
+            <input
+                type="checkbox"
+                class="project-check">
+
+            What-if analysis
+
+        </div>
+
+
+        <div class="project-step">
+
+            <input
+                type="checkbox"
+                class="project-check">
+
             Study priority algorithm
+
         </div>
 
-        <div class="project-step">
-            <input type="checkbox" class="project-check">
-            Dashboard + data visualization
-        </div>
 
         <div class="project-step">
-            <input type="checkbox" class="project-check">
+
+            <input
+                type="checkbox"
+                class="project-check">
+
             Error / weakness tracking
+
         </div>
 
-        <div class="project-step">
-            <input type="checkbox" class="project-check">
-            Testing
-        </div>
 
         <div class="project-step">
-            <input type="checkbox" class="project-check">
-            GitHub README + documentation
+
+            <input
+                type="checkbox"
+                class="project-check">
+
+            Data visualization
+
+        </div>
+
+
+        <div class="project-step">
+
+            <input
+                type="checkbox"
+                class="project-check">
+
+            Responsive UI
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- TECH STACK -->
+
+    <div class="card">
+
+        <h2>
+            🧰 Suggested Stack
+        </h2>
+
+
+        <div class="priority">
+
+            <div class="priority-dot blue"></div>
+
+            <div>
+
+                <strong>
+                    Next.js + TypeScript
+                </strong>
+
+                <small>
+                    Frontend + application framework
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+
+                <strong>
+                    Supabase / PostgreSQL
+                </strong>
+
+                <small>
+                    Database + authentication
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot purple"></div>
+
+            <div>
+
+                <strong>
+                    AI coding agent
+                </strong>
+
+                <small>
+                    Implementation + review assistance
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot blue"></div>
+
+            <div>
+
+                <strong>
+                    GitHub
+                </strong>
+
+                <small>
+                    Source control + portfolio
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+
+                <strong>
+                    Vercel
+                </strong>
+
+                <small>
+                    Deployment
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="alert blue-alert">
+
+            Keep the stack small.
+            More technologies do not automatically
+            make a better project.
+
         </div>
 
     </div>
 
 
-    <!-- PROJECT SCHEDULE -->
 
-    <div class="card">
+    <!-- PROJECT ROADMAP -->
 
-        <h2>⏱ Project Schedule</h2>
+    <div class="card full">
 
-        <p class="muted">
-            Target: approximately <strong>2 hours/week</strong>.
-        </p>
+        <h2>
+            🏗️ Project Roadmap
+        </h2>
+
 
         <div class="phase active">
 
-            <div class="phase-number">1</div>
+            <div class="phase-number">
+                1
+            </div>
 
             <div>
-                <strong>After current CHEM midterm</strong>
+
+                <strong>
+                    Requirements
+                </strong>
+
                 <p class="muted">
-                    2 hours total — requirements,
-                    UI sketch, project setup.
+
+                    YOU define the problem,
+                    target users and MVP features.
+
                 </p>
+
             </div>
 
         </div>
+
 
         <div class="phase">
 
-            <div class="phase-number">2</div>
+            <div class="phase-number">
+                2
+            </div>
 
             <div>
-                <strong>Build the MVP</strong>
+
+                <strong>
+                    Architecture
+                </strong>
+
                 <p class="muted">
-                    Courses, assessments and grade calculations.
+
+                    YOU choose the architecture
+                    after AI presents alternatives.
+
                 </p>
+
             </div>
 
         </div>
+
 
         <div class="phase">
 
-            <div class="phase-number">3</div>
+            <div class="phase-number">
+                3
+            </div>
 
             <div>
-                <strong>Add intelligence</strong>
+
+                <strong>
+                    MVP
+                </strong>
+
                 <p class="muted">
-                    Grade trajectories and study-priority algorithm.
+
+                    Build the smallest useful version.
+
                 </p>
+
             </div>
 
         </div>
+
 
         <div class="phase">
 
-            <div class="phase-number">4</div>
+            <div class="phase-number">
+                4
+            </div>
 
             <div>
-                <strong>Polish</strong>
+
+                <strong>
+                    Grade Engine
+                </strong>
+
                 <p class="muted">
-                    Testing, README, screenshots and documentation.
+
+                    Implement and test weighted-grade
+                    calculations and what-if scenarios.
+
                 </p>
+
             </div>
 
         </div>
 
-        <div class="alert">
-            During midterm weeks:
-            <strong>project time can drop to zero.</strong>
+
+        <div class="phase">
+
+            <div class="phase-number">
+                5
+            </div>
+
+            <div>
+
+                <strong>
+                    Priority Engine
+                </strong>
+
+                <p class="muted">
+
+                    Design a transparent algorithm for
+                    determining what a student should work on.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                6
+            </div>
+
+            <div>
+
+                <strong>
+                    Quality
+                </strong>
+
+                <p class="muted">
+
+                    Testing, accessibility,
+                    security and performance.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                7
+            </div>
+
+            <div>
+
+                <strong>
+                    Deploy
+                </strong>
+
+                <p class="muted">
+
+                    GitHub → Vercel → production.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                8
+            </div>
+
+            <div>
+
+                <strong>
+                    Portfolio
+                </strong>
+
+                <p class="muted">
+
+                    README, architecture diagram,
+                    screenshots, technical decisions,
+                    testing results and live demo.
+
+                </p>
+
+            </div>
+
         </div>
 
     </div>
 
 
-    <!-- CAREER TIMELINE -->
+
+    <!-- TIMELINE -->
 
     <div class="card full">
 
-        <h2>📅 Career Timeline</h2>
+        <h2>
+            📅 Career Timeline
+        </h2>
+
 
         <div class="phase">
-            <div class="phase-number">O</div>
-            <div>
-                <strong>October — Academic Foundation</strong>
-                <p class="muted">
-                    Focus primarily on GPA. Minimal project work.
-                </p>
+
+            <div class="phase-number">
+                O
             </div>
+
+            <div>
+
+                <strong>
+                    October — GPA First
+                </strong>
+
+                <p class="muted">
+
+                    CHEM, PHYS, MATH and ENGG.
+                    Project work stays minimal.
+
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="phase">
-            <div class="phase-number">N</div>
-            <div>
-                <strong>November — Build</strong>
-                <p class="muted">
-                    Build the project MVP for ~2 hours/week.
-                </p>
-            </div>
-        </div>
 
         <div class="phase">
-            <div class="phase-number">D</div>
-            <div>
-                <strong>December — Polish</strong>
-                <p class="muted">
-                    Finish project, GitHub README,
-                    screenshots and technical documentation.
-                </p>
+
+            <div class="phase-number">
+                N
             </div>
+
+            <div>
+
+                <strong>
+                    November — Build
+                </strong>
+
+                <p class="muted">
+
+                    Approximately 2 hours/week.
+
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="phase">
-            <div class="phase-number">J</div>
-            <div>
-                <strong>January — Internship Preparation</strong>
-                <p class="muted">
-                    Résumé, LinkedIn, GitHub, interview preparation
-                    and applications.
-                </p>
-            </div>
-        </div>
 
         <div class="phase">
-            <div class="phase-number">S</div>
-            <div>
-                <strong>Summer 2027 — Internship</strong>
-                <p class="muted">
-                    Apply for opportunities while continuing
-                    to build technical experience.
-                </p>
+
+            <div class="phase-number">
+                D
             </div>
+
+            <div>
+
+                <strong>
+                    December — Polish
+                </strong>
+
+                <p class="muted">
+
+                    Testing, documentation,
+                    GitHub and deployment.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                J
+            </div>
+
+            <div>
+
+                <strong>
+                    January — Applications
+                </strong>
+
+                <p class="muted">
+
+                    Resume, GitHub, networking,
+                    interview preparation and applications.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                S
+            </div>
+
+            <div>
+
+                <strong>
+                    Summer 2027
+                </strong>
+
+                <p class="muted">
+
+                    Internship / work experience /
+                    continued project development.
+
+                </p>
+
+            </div>
+
         </div>
 
     </div>
 
 
-    <!-- INTERNSHIP WEEKLY -->
+
+    <!-- WEEKLY CAREER -->
 
     <div class="card full">
 
-        <h2>Weekly Career Minimum</h2>
+        <h2>
+            Weekly Career Minimum
+        </h2>
 
         <p class="muted">
-            You don't need to spend hours every day thinking about internships.
+
+            Normal week:
+            approximately 2–3 hours total.
+
+            Midterm week:
+            career work can be paused.
+
         </p>
+
 
         <div class="checklist">
 
-            <label class="check-item">
-                <input type="checkbox">
-                Look at 5 internship postings
-            </label>
 
             <label class="check-item">
+
                 <input type="checkbox">
-                Identify skills employers are requesting
+
+                2 hours portfolio development
+
             </label>
+
 
             <label class="check-item">
+
                 <input type="checkbox">
-                Spend ~2 hours on the portfolio project
+
+                Look at 5 relevant internship postings
+
             </label>
+
 
             <label class="check-item">
+
                 <input type="checkbox">
-                Spend 30 minutes improving résumé / GitHub / LinkedIn
+
+                Identify requested skills
+
             </label>
 
-        </div>
 
-        <div class="alert">
-            <strong>Midterm override:</strong>
-            If you have a major exam within 7 days,
-            these tasks are optional or paused.
-        </div>
+            <label class="check-item">
 
-    </div>
+                <input type="checkbox">
 
-</section>
+                Improve GitHub / resume / LinkedIn
+
+            </label>
 
 
-<!-- CATCH UP -->
-
-<section id="catchup" class="container dashboard">
-
-    <div class="card full">
-
-        <h2>🧠 Catch-Up Mode</h2>
-
-        <p class="muted">
-            Don't spend four hours mastering one prerequisite.
-            Get enough understanding to move forward, then
-            deepen it through practice.
-        </p>
-
-        <button class="btn" onclick="openCatchup()">
-            Start Catch-Up
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- ERRORS -->
-
-<section id="errors" class="container dashboard">
-
-    <div class="card">
-
-        <h2>❌ Error Log</h2>
-
-        <p class="muted">
-            Your mistakes are data.
-        </p>
-
-        <label>Question / Topic</label>
-        <input id="errorTopic" type="text">
-
-        <label>What went wrong?</label>
-        <textarea id="errorReason"></textarea>
-
-        <label>Correct approach</label>
-        <textarea id="errorFix"></textarea>
-
-        <button class="btn" onclick="addError()">
-            Log Error
-        </button>
-
-    </div>
-
-    <div class="card">
-
-        <h2>Your Errors</h2>
-
-        <div id="errorList">
-            <p class="muted">No errors logged yet.</p>
         </div>
 
     </div>
 
+
 </section>
 
 
-<!-- ALTER EGO -->
+
+<!-- =====================================================
+     PORTFOLIO EVIDENCE
+===================================================== -->
 
 <section class="container dashboard">
 
+
     <div class="card full">
 
-        <h2>⚙️ The 4.0 Engineer</h2>
+        <h2>
+            📁 Portfolio Evidence
+        </h2>
 
-        <div class="priority">
-            <div class="priority-dot green"></div>
-            <div>
-                <strong>Show up.</strong>
-                <small>Consistency beats occasional heroic sessions.</small>
+        <p class="muted">
+
+            Don't just finish the application.
+            Collect evidence that demonstrates how you engineered it.
+
+        </p>
+
+
+        <div class="standard-grid">
+
+
+            <div class="standard">
+
+                <strong>
+                    Problem
+                </strong>
+
+                Why did you build it?
+
             </div>
-        </div>
 
-        <div class="priority">
-            <div class="priority-dot green"></div>
-            <div>
-                <strong>Do the work before seeking comfort.</strong>
-                <small>No shows before your first serious study block.</small>
+
+            <div class="standard">
+
+                <strong>
+                    Architecture
+                </strong>
+
+                Why did you choose this design?
+
             </div>
-        </div>
 
-        <div class="priority">
-            <div class="priority-dot green"></div>
-            <div>
-                <strong>Don't let confusion accumulate.</strong>
-                <small>Identify the exact gap and fix the prerequisite.</small>
+
+            <div class="standard">
+
+                <strong>
+                    Algorithms
+                </strong>
+
+                How does the priority engine work?
+
             </div>
-        </div>
 
-        <div class="priority">
-            <div class="priority-dot green"></div>
-            <div>
-                <strong>Maximize every mark.</strong>
-                <small>Assignments, quizzes, labs and exams all matter.</small>
+
+            <div class="standard">
+
+                <strong>
+                    Testing
+                </strong>
+
+                How did you prove it works?
+
             </div>
-        </div>
 
-        <div class="priority">
-            <div class="priority-dot green"></div>
-            <div>
-                <strong>Recover immediately.</strong>
-                <small>A bad day doesn't become a bad week.</small>
+
+            <div class="standard">
+
+                <strong>
+                    Security
+                </strong>
+
+                How did you protect user data?
+
             </div>
-        </div>
 
-        <div class="priority">
-            <div class="priority-dot green"></div>
-            <div>
-                <strong>Build the career gradually.</strong>
-                <small>Protect GPA first, then build experience.</small>
+
+            <div class="standard">
+
+                <strong>
+                    AI Workflow
+                </strong>
+
+                How did you validate AI-generated code?
+
             </div>
-        </div>
 
-        <div class="alert">
-            <strong>Question of the day:</strong><br>
-            What would the person who gets the 4.0
-            do right now?
+
         </div>
 
     </div>
 
+
+
+    <!-- CODE REVIEW CHECKLIST -->
+
+    <div class="card full">
+
+        <h2>
+            🔍 Pre-Release Code Review
+        </h2>
+
+        <p class="muted">
+
+            Before calling the project finished,
+            answer YES to these.
+
+        </p>
+
+
+        <div class="checklist" id="reviewChecklist">
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                All important tests pass
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                I understand all major code paths
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                No secrets are committed to Git
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                Environment variables are configured safely
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                User input is validated
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                Authentication / authorization is tested
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                Dependencies have been reviewed
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                Mobile layout works
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                Keyboard accessibility works
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                Production deployment works
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                README explains the architecture
+
+            </label>
+
+
+            <label class="check-item">
+
+                <input type="checkbox">
+
+                I can explain the major technical decisions
+
+            </label>
+
+
+        </div>
+
+    </div>
+
+
 </section>
+
+
+
+<!-- =====================================================
+     CATCH UP
+===================================================== -->
+
+<section
+    id="catchup"
+    class="container dashboard">
+
+
+    <div class="card full">
+
+        <h2>
+            🧠 Catch-Up Mode
+        </h2>
+
+        <p class="muted">
+
+            Get enough understanding to move forward.
+            Deep mastery comes through repeated exposure.
+
+        </p>
+
+
+        <button
+            class="btn"
+            onclick="openCatchup()">
+
+            Start Catch-Up
+
+        </button>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     ERROR LOG
+===================================================== -->
+
+<section
+    id="errors"
+    class="container dashboard">
+
+
+    <div class="card">
+
+        <h2>
+            ❌ Error Log
+        </h2>
+
+        <p class="muted">
+
+            Your mistakes are data.
+            Record them and revisit them.
+
+        </p>
+
+
+        <label>
+            Question / Topic
+        </label>
+
+        <input
+            id="errorTopic"
+            type="text">
+
+
+        <label>
+            What went wrong?
+        </label>
+
+        <textarea
+            id="errorReason">
+        </textarea>
+
+
+        <label>
+            Correct approach
+        </label>
+
+        <textarea
+            id="errorFix">
+        </textarea>
+
+
+        <button
+            class="btn"
+            onclick="addError()">
+
+            Log Error
+
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            Your Errors
+        </h2>
+
+        <div id="errorList">
+
+            <p class="muted">
+                No errors logged yet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     ALTER EGO
+===================================================== -->
+
+<section class="container dashboard">
+
+
+    <div class="card full">
+
+        <h2>
+            ⚙️ The 4.0 Engineer
+        </h2>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+
+                <strong>
+                    Show up.
+                </strong>
+
+                <small>
+                    Consistency beats occasional heroic sessions.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+
+                <strong>
+                    Do the work before seeking comfort.
+                </strong>
+
+                <small>
+                    No shows before your first serious study block.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+
+                <strong>
+                    Don't let confusion accumulate.
+                </strong>
+
+                <small>
+                    Identify the exact gap and fix the prerequisite.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+
+                <strong>
+                    Use AI — don't hide behind AI.
+                </strong>
+
+                <small>
+                    Understand, test and verify what AI produces.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+
+                <strong>
+                    Maximize every mark.
+                </strong>
+
+                <small>
+                    Assignments, quizzes, labs and exams all matter.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+
+                <strong>
+                    Recover immediately.
+                </strong>
+
+                <small>
+                    A bad day doesn't become a bad week.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority">
+
+            <div class="priority-dot green"></div>
+
+            <div>
+
+                <strong>
+                    Build the career gradually.
+                </strong>
+
+                <small>
+                    GPA first. Experience second. Panic never.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="alert">
+
+            <strong>
+                The question:
+            </strong>
+
+            <br><br>
+
+            What would the person who gets the 4.0
+            AND becomes a strong engineer do right now?
+
+        </div>
+
+    </div>
+
+
+</section>
+
 
 </main>
 
 
-<!-- CATCH-UP MODAL -->
 
-<div class="modal" id="catchupModal">
+<!-- =====================================================
+     CATCH-UP MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="catchupModal">
+
 
     <div class="modal-content">
 
-        <h2>Catch-Up Mode</h2>
+
+        <h2>
+            Catch-Up Mode
+        </h2>
+
 
         <p class="muted">
-            Your goal is minimum viable understanding —
-            enough to continue without carrying a major gap forward.
+
+            Your target is minimum viable understanding:
+            enough to continue without carrying a major
+            conceptual hole forward.
+
         </p>
 
-        <label>What topic are you stuck on?</label>
-        <input id="catchTopic" type="text">
 
-        <label>What exactly don't you understand?</label>
-        <textarea id="catchGap"></textarea>
+        <label>
+            Topic
+        </label>
 
-        <label>What prerequisite might be missing?</label>
-        <input id="catchPrereq" type="text">
+        <input
+            id="catchTopic"
+            type="text">
 
-        <h3>Can you now...</h3>
+
+        <label>
+            Exact confusion
+        </label>
+
+        <textarea
+            id="catchGap">
+        </textarea>
+
+
+        <label>
+            Missing prerequisite
+        </label>
+
+        <input
+            id="catchPrereq"
+            type="text">
+
+
+        <h3>
+            Can you now...
+        </h3>
+
 
         <label class="check-item">
-            <input type="checkbox" id="catchExplain">
+
+            <input
+                type="checkbox"
+                id="catchExplain">
+
             Explain the concept in your own words?
+
         </label>
 
+
         <label class="check-item">
-            <input type="checkbox" id="catchIdentify">
+
+            <input
+                type="checkbox"
+                id="catchIdentify">
+
             Identify what information a problem gives you?
+
         </label>
+
 
         <label class="check-item">
-            <input type="checkbox" id="catchProblem">
+
+            <input
+                type="checkbox"
+                id="catchProblem">
+
             Solve 2–3 basic representative problems?
+
         </label>
 
-        <div style="margin-top:20px; display:flex; gap:10px;">
 
-            <button class="btn" onclick="finishCatchup()">
+        <div
+            style="
+                margin-top:20px;
+                display:flex;
+                gap:10px;
+                flex-wrap:wrap;
+            ">
+
+
+            <button
+                class="btn"
+                onclick="finishCatchup()">
+
                 Check Understanding
+
             </button>
 
-            <button class="btn secondary" onclick="closeCatchup()">
+
+            <button
+                class="btn secondary"
+                onclick="closeCatchup()">
+
                 Close
+
             </button>
+
 
         </div>
 
+
         <div id="catchResult"></div>
+
 
     </div>
 
 </div>
 
 
+
 <script>
 
-/* ================= LOCAL STORAGE ================= */
+
+/* =====================================================
+   STORAGE
+===================================================== */
 
 function save(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(value)
+    );
+
 }
+
 
 function load(key, fallback) {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : fallback;
+
+    const data =
+        localStorage.getItem(key);
+
+    return data
+        ? JSON.parse(data)
+        : fallback;
+
 }
 
 
-/* ================= CHECKLIST ================= */
+/* =====================================================
+   DAILY CHECKLIST
+===================================================== */
 
-const checklist = document.querySelectorAll("#checklist input");
+const checklist =
+    document.querySelectorAll(
+        "#checklist input"
+    );
 
-let savedChecks = load("dailyChecks", []);
 
-checklist.forEach((box, index) => {
+let savedChecks =
+    load(
+        "dailyChecks",
+        []
+    );
 
-    box.checked = savedChecks[index] || false;
 
-    updateCheckVisual(box);
+checklist.forEach(
+    (box, index) => {
 
-    box.addEventListener("change", () => {
-
-        savedChecks[index] = box.checked;
-
-        save("dailyChecks", savedChecks);
+        box.checked =
+            savedChecks[index] || false;
 
         updateCheckVisual(box);
 
-        updateStats();
 
-    });
+        box.addEventListener(
+            "change",
+            () => {
 
-});
+                savedChecks[index] =
+                    box.checked;
+
+                save(
+                    "dailyChecks",
+                    savedChecks
+                );
+
+                updateCheckVisual(box);
+
+                updateStats();
+
+            }
+        );
+
+    }
+);
+
 
 function updateCheckVisual(box) {
 
-    const parent = box.closest(".check-item");
+    const parent =
+        box.closest(".check-item");
 
     if (box.checked)
         parent.classList.add("completed");
@@ -1253,164 +3498,364 @@ function updateCheckVisual(box) {
 }
 
 
-/* ================= PROJECT ================= */
+/* =====================================================
+   PROJECT CHECKLIST
+===================================================== */
 
 const projectChecks =
-    document.querySelectorAll(".project-check");
-
-let savedProject = load("projectChecks", []);
-
-projectChecks.forEach((box, index) => {
-
-    box.checked = savedProject[index] || false;
-
-    box.addEventListener("change", () => {
-
-        savedProject[index] = box.checked;
-
-        save("projectChecks", savedProject);
-
-        updateStats();
-
-    });
-
-});
+    document.querySelectorAll(
+        ".project-check"
+    );
 
 
-/* ================= STATS ================= */
+let savedProject =
+    load(
+        "projectChecks",
+        []
+    );
+
+
+projectChecks.forEach(
+    (box, index) => {
+
+        box.checked =
+            savedProject[index] || false;
+
+
+        box.addEventListener(
+            "change",
+            () => {
+
+                savedProject[index] =
+                    box.checked;
+
+                save(
+                    "projectChecks",
+                    savedProject
+                );
+
+                updateProjectProgress();
+
+                updateStats();
+
+            }
+        );
+
+    }
+);
+
+
+function updateProjectProgress() {
+
+    const completed =
+        [...projectChecks]
+            .filter(
+                box => box.checked
+            )
+            .length;
+
+
+    const total =
+        projectChecks.length;
+
+
+    const percentage =
+        total === 0
+            ? 0
+            : Math.round(
+                completed / total * 100
+            );
+
+
+    document
+        .getElementById(
+            "projectProgress"
+        )
+        .textContent =
+        percentage + "%";
+
+}
+
+
+updateProjectProgress();
+
+
+/* =====================================================
+   STATS
+===================================================== */
 
 function updateStats() {
 
     const daily =
-        [...checklist].filter(x => x.checked).length;
+        [...checklist]
+            .filter(
+                box => box.checked
+            )
+            .length;
 
-    document.getElementById("checkCount").textContent =
+
+    document
+        .getElementById(
+            "checkCount"
+        )
+        .textContent =
         daily;
 
-    const errors = load("errors", []);
 
-    document.getElementById("errorCount").textContent =
+    const errors =
+        load(
+            "errors",
+            []
+        );
+
+
+    document
+        .getElementById(
+            "errorCount"
+        )
+        .textContent =
         errors.length;
 
-    const hours = load("projectHours", 0);
 
-    document.getElementById("projectHours").textContent =
+    const hours =
+        load(
+            "projectHours",
+            0
+        );
+
+
+    document
+        .getElementById(
+            "projectHours"
+        )
+        .textContent =
         hours + "h";
 
 }
 
+
 updateStats();
 
 
-/* ================= TIMER ================= */
+/* =====================================================
+   TIMER
+===================================================== */
 
-let timerSeconds = 50 * 60;
-let timerInterval = null;
+let timerSeconds =
+    50 * 60;
+
+
+let timerInterval =
+    null;
+
 
 function renderTimer() {
 
     const minutes =
-        Math.floor(timerSeconds / 60);
+        Math.floor(
+            timerSeconds / 60
+        );
+
 
     const seconds =
         timerSeconds % 60;
 
-    document.getElementById("timer").textContent =
-        String(minutes).padStart(2,"0") +
-        ":" +
-        String(seconds).padStart(2,"0");
+
+    document
+        .getElementById(
+            "timer"
+        )
+        .textContent =
+
+        String(minutes)
+            .padStart(2, "0")
+
+        + ":" +
+
+        String(seconds)
+            .padStart(2, "0");
 
 }
+
 
 function startTimer() {
 
-    if (timerInterval) return;
+    if (timerInterval)
+        return;
 
-    timerInterval = setInterval(() => {
 
-        if (timerSeconds <= 0) {
+    timerInterval =
+        setInterval(
+            () => {
 
-            clearInterval(timerInterval);
-            timerInterval = null;
+                if (
+                    timerSeconds <= 0
+                ) {
 
-            alert("Focus block complete. Take a break.");
+                    clearInterval(
+                        timerInterval
+                    );
 
-            return;
-        }
+                    timerInterval =
+                        null;
 
-        timerSeconds--;
 
-        renderTimer();
+                    alert(
+                        "Focus block complete. Take a break."
+                    );
 
-    }, 1000);
+
+                    return;
+
+                }
+
+
+                timerSeconds--;
+
+                renderTimer();
+
+            },
+            1000
+        );
 
 }
+
 
 function pauseTimer() {
 
-    clearInterval(timerInterval);
+    clearInterval(
+        timerInterval
+    );
 
-    timerInterval = null;
+    timerInterval =
+        null;
 
 }
+
 
 function resetTimer() {
 
     pauseTimer();
 
-    timerSeconds = 50 * 60;
+    timerSeconds =
+        50 * 60;
 
     renderTimer();
 
 }
+
 
 function setTimer(minutes) {
 
     pauseTimer();
 
-    timerSeconds = minutes * 60;
+    timerSeconds =
+        minutes * 60;
 
     renderTimer();
 
 }
 
+
 renderTimer();
 
 
-/* ================= ERROR LOG ================= */
+/* =====================================================
+   ERROR LOG
+===================================================== */
 
 function addError() {
 
     const topic =
-        document.getElementById("errorTopic").value.trim();
+        document
+            .getElementById(
+                "errorTopic"
+            )
+            .value
+            .trim();
+
 
     const reason =
-        document.getElementById("errorReason").value.trim();
+        document
+            .getElementById(
+                "errorReason"
+            )
+            .value
+            .trim();
+
 
     const fix =
-        document.getElementById("errorFix").value.trim();
+        document
+            .getElementById(
+                "errorFix"
+            )
+            .value
+            .trim();
 
-    if (!topic || !reason || !fix) {
 
-        alert("Fill in all three fields.");
+    if (
+        !topic ||
+        !reason ||
+        !fix
+    ) {
+
+        alert(
+            "Fill in all three fields."
+        );
 
         return;
+
     }
 
-    const errors = load("errors", []);
+
+    const errors =
+        load(
+            "errors",
+            []
+        );
+
 
     errors.push({
+
         topic,
+
         reason,
+
         fix,
-        date: new Date().toLocaleDateString()
+
+        date:
+            new Date()
+                .toLocaleDateString()
+
     });
 
-    save("errors", errors);
 
-    document.getElementById("errorTopic").value = "";
-    document.getElementById("errorReason").value = "";
-    document.getElementById("errorFix").value = "";
+    save(
+        "errors",
+        errors
+    );
+
+
+    document
+        .getElementById(
+            "errorTopic"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "errorReason"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "errorFix"
+        )
+        .value = "";
+
 
     renderErrors();
 
@@ -1418,103 +3863,164 @@ function addError() {
 
 }
 
+
 function renderErrors() {
 
-    const errors = load("errors", []);
+    const errors =
+        load(
+            "errors",
+            []
+        );
+
 
     const container =
-        document.getElementById("errorList");
+        document
+            .getElementById(
+                "errorList"
+            );
+
 
     if (!errors.length) {
 
         container.innerHTML =
-            '<p class="muted">No errors logged yet.</p>';
+            `
+            <p class="muted">
+                No errors logged yet.
+            </p>
+            `;
 
         return;
+
     }
 
-    container.innerHTML = errors
-        .slice()
-        .reverse()
-        .map(error => `
 
-            <div class="error">
+    container.innerHTML =
+        errors
+            .slice()
+            .reverse()
+            .map(
+                error => `
 
-                <strong>${escapeHTML(error.topic)}</strong>
+                <div class="error">
 
-                <p>
-                    <strong>What went wrong:</strong><br>
-                    ${escapeHTML(error.reason)}
-                </p>
+                    <strong>
+                        ${escapeHTML(error.topic)}
+                    </strong>
 
-                <p>
-                    <strong>Correct approach:</strong><br>
-                    ${escapeHTML(error.fix)}
-                </p>
+                    <p>
+                        <strong>
+                            What went wrong:
+                        </strong>
+                        <br>
+                        ${escapeHTML(error.reason)}
+                    </p>
 
-                <small class="muted">
-                    ${error.date}
-                </small>
+                    <p>
+                        <strong>
+                            Correct approach:
+                        </strong>
+                        <br>
+                        ${escapeHTML(error.fix)}
+                    </p>
 
-            </div>
+                    <small class="muted">
+                        ${error.date}
+                    </small>
 
-        `)
-        .join("");
+                </div>
+
+                `
+            )
+            .join("");
 
 }
+
 
 renderErrors();
 
 
-/* ================= CATCH UP ================= */
+/* =====================================================
+   CATCH-UP
+===================================================== */
 
 function openCatchup() {
 
     document
-        .getElementById("catchupModal")
-        .classList.add("show");
+        .getElementById(
+            "catchupModal"
+        )
+        .classList
+        .add("show");
 
 }
+
 
 function closeCatchup() {
 
     document
-        .getElementById("catchupModal")
-        .classList.remove("show");
+        .getElementById(
+            "catchupModal"
+        )
+        .classList
+        .remove("show");
 
 }
+
 
 function finishCatchup() {
 
     const explain =
-        document.getElementById("catchExplain").checked;
+        document
+            .getElementById(
+                "catchExplain"
+            )
+            .checked;
+
 
     const identify =
-        document.getElementById("catchIdentify").checked;
+        document
+            .getElementById(
+                "catchIdentify"
+            )
+            .checked;
+
 
     const problem =
-        document.getElementById("catchProblem").checked;
+        document
+            .getElementById(
+                "catchProblem"
+            )
+            .checked;
+
 
     const result =
-        document.getElementById("catchResult");
+        document
+            .getElementById(
+                "catchResult"
+            );
 
-    if (explain && identify && problem) {
+
+    if (
+        explain &&
+        identify &&
+        problem
+    ) {
 
         result.innerHTML = `
 
-            <div class="alert"
-                 style="margin-top:20px;">
+            <div class="alert green-alert">
 
-                <strong>✓ Minimum viable understanding achieved.</strong>
+                <strong>
+                    ✓ Minimum viable understanding achieved.
+                </strong>
 
                 <br><br>
 
-                You can move on.
+                Move forward.
 
                 <br><br>
 
                 Schedule this topic for spaced review later.
-                You don't need perfect mastery right now.
 
             </div>
 
@@ -1524,16 +4030,17 @@ function finishCatchup() {
 
         result.innerHTML = `
 
-            <div class="alert"
-                 style="margin-top:20px;">
+            <div class="alert">
 
-                <strong>Don't move on yet.</strong>
+                <strong>
+                    Don't move on yet.
+                </strong>
 
                 <br><br>
 
                 Identify the smallest missing prerequisite,
                 spend another 20–30 minutes learning it,
-                then attempt the basic problems again.
+                and retry the basic problems.
 
             </div>
 
@@ -1544,7 +4051,9 @@ function finishCatchup() {
 }
 
 
-/* ================= NAVIGATION ================= */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 function scrollToSection(id) {
 
@@ -1557,42 +4066,93 @@ function scrollToSection(id) {
 }
 
 
-/* ================= SECURITY ================= */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
 function escapeHTML(text) {
 
     return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
-/* ================= RESET DAY ================= */
+/* =====================================================
+   ESCAPE MODAL
+===================================================== */
 
-function resetDailyChecklist() {
+document.addEventListener(
+    "keydown",
+    event => {
 
-    localStorage.removeItem("dailyChecks");
+        if (
+            event.key === "Escape"
+        ) {
 
-    location.reload();
+            closeCatchup();
 
-}
-
-
-/* ================= KEYBOARD SHORTCUT ================= */
-
-document.addEventListener("keydown", event => {
-
-    if (event.key === "Escape") {
-
-        closeCatchup();
+        }
 
     }
+);
 
-});
+
+/* =====================================================
+   PROJECT HOURS
+=====================================================
+
+   This is intentionally manual.
+   You should record actual project time rather
+   than letting the application pretend you worked.
+
+===================================================== */
+
+function addProjectHour() {
+
+    let hours =
+        load(
+            "projectHours",
+            0
+        );
+
+
+    hours += 1;
+
+
+    save(
+        "projectHours",
+        hours
+    );
+
+
+    updateStats();
+
+}
+
 
 </script>
 
